@@ -144,6 +144,50 @@ table{border-collapse:collapse;width:100%}
 .rv .full{white-space:pre-wrap;margin:6px 0 0;max-height:260px;overflow:auto;background:var(--card);padding:8px;border-radius:6px}
 .rv select{min-height:40px;font-size:14px}
 .fills{columns:2 260px;font-size:14px;color:var(--mut);margin:6px 0 0;padding-left:18px}
+body.dbv main{max-width:1480px}
+.strip[hidden]{display:none}
+.dcol{display:flex;flex-direction:column;gap:16px;grid-column:span 6}.dcol.c7{grid-column:span 7}.dcol.c5{grid-column:span 5}.dcol>.dc{grid-column:auto}
+@media(max-width:1100px){.dcol,.dcol.c7,.dcol.c5{grid-column:span 12}}
+.cls{text-align:center;font-weight:700;font-size:13px;letter-spacing:.02em;padding:3px 8px;color:#fff;border-radius:4px;margin-bottom:14px}
+.dbh{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+.dbh .meta{color:var(--mut);font-size:15px}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--mut)}
+.live i{width:9px;height:9px;border-radius:50%;background:var(--ok)}
+.db{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;align-items:start}
+.dc{grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.dc>header{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg)}
+.dc>header .t{font-family:"Barlow Condensed",Arial,sans-serif;font-weight:700;font-size:19px;flex:1}
+.dc>header .src{font-size:12px;font-weight:700;color:var(--mut);white-space:nowrap}
+.dc>header a{font-size:14px;font-weight:600;white-space:nowrap;padding:6px 4px}
+.dc .bd{padding:12px 14px;font-size:15px}
+.dc .bd p{margin:0 0 8px}
+.dc .bd ul{margin:4px 0 0;padding-left:18px}.dc .bd li{margin:3px 0}
+.kpi{grid-column:span 2;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;color:inherit;display:block}
+.kpi b{display:block;font-family:"Barlow Condensed",Arial,sans-serif;font-size:clamp(30px,3vw,40px);line-height:1;font-variant-numeric:tabular-nums}
+.kpi span{display:block;font-size:13px;font-weight:700;color:var(--mut);margin-top:6px}
+.kpi small{display:block;font-size:13px;color:var(--mut);margin-top:2px}
+.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}.s8{grid-column:span 8}.s3{grid-column:span 3}
+@media(max-width:1100px){.kpi{grid-column:span 4}.s3{grid-column:span 6}.s4,.s5,.s7,.s8{grid-column:span 12}.s6{grid-column:span 12}}
+@media(max-width:600px){.kpi{grid-column:span 6}.s3{grid-column:span 12}}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;background:var(--line);color:var(--ink)}
+.pill.g{background:var(--green-l);color:var(--green)}.pill.a{background:var(--amber-l);color:var(--amber)}.pill.r{background:light-dark(#fde2e6,#3a1016);color:var(--red)}.pill.b{background:var(--blue-l);color:var(--blue)}
+.lane{display:grid;grid-template-columns:repeat(7,minmax(130px,1fr));gap:8px;overflow-x:auto;padding:12px 14px}
+.lane a{display:block;text-decoration:none;color:inherit;border-radius:8px;padding:10px;border:1px solid var(--line);background:var(--bg)}
+.lane a.cur{border:2px solid var(--blue)}
+.lane .n{font-size:12px;font-weight:700;color:var(--mut)}.lane .tt{font-weight:700;font-size:15px;line-height:1.2;margin:2px 0 8px;min-height:2.4em}
+.prod{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.prod:last-child{border-bottom:0}
+.prod .nm{font-weight:700;font-size:15px}.prod .bar{grid-column:1 / -1;height:7px}
+.prod .miss{grid-column:1 / -1;font-size:13px;color:var(--mut)}
+.dt td,.dt th{padding:6px 6px;border-bottom:1px solid var(--line);text-align:left;font-size:14px;vertical-align:top}
+.dt th{font-size:12px;color:var(--mut)}
+.coac{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px}
+.coac>div{border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--bg)}
+.coac .nm{font-weight:700;font-size:16px;margin-bottom:6px}
+.scr{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.scr span{font-size:12px;font-weight:700;padding:2px 6px;border-radius:4px;border:1px solid var(--line)}
+.scr span.on{background:var(--green-l);color:var(--green);border-color:transparent}
+.emp{color:var(--mut);font-style:italic}
 .calc{font-size:14px;color:var(--blue);font-weight:600;margin-top:-8px;margin-bottom:14px}
 .warn{color:var(--red);font-weight:600}
 /* slide viewer */
@@ -510,7 +554,7 @@ try{ST.ws=localStorage.getItem('mdmp:ws')||'personal'}catch(e){}
 const lkey=()=>'mdmp:v:'+ST.ws;
 function loadLocal(){try{const s=localStorage.getItem(lkey());V=s?JSON.parse(s):{}}catch(e){V={}}}
 let ltimer;function saveLocal(){clearTimeout(ltimer);ltimer=setTimeout(()=>{try{localStorage.setItem(lkey(),JSON.stringify(V))}catch(e){}},500)}
-function status(t,w){const s=$('#sav');s.textContent=t;s.classList.toggle('warn',!!w)}
+function status(t,w){const s=$('#sav');s.textContent=t;s.classList.toggle('warn',!!w);const l=$('.live span');if(l)l.textContent=t}
 function wsLabel(){return ST.ws==='personal'?'Personal workspace':'Team: '+ST.ws.slice(5)}
 function colPath(){return ST.ws==='personal'?'data/users/'+ST.uid:'teams/'+ST.ws.slice(5)+'/f'}
 function setV(id,val){V[id]=val;saveLocal();queue(id);meta()}
@@ -613,8 +657,8 @@ function mxBlock(){const x=mxCalc();if(!x)return {h:'Decision matrix',ty:'empty'
  return {h:'Decision matrix — ranks, lower is preferred',ty:'table',d:{cols:['Criterion',...x.cs.map(c=>c.name)],rows}}}
 
 /* ---------- RENDER: chrome ---------- */
-function route(){const h=(location.hash||'#overview').slice(1);const m=/^step-([1-7])$/.exec(h);return m?{v:'step',n:+m[1]}:{v:['reference','data'].includes(h)?h:'overview'}}
-function nav(){const r=route();const L=[['overview','Overview'],...STEPS.map(s=>['step-'+s.n,'Step '+s.n]),['reference','Reference'],['data','Data']];
+function route(){const h=(location.hash||'#overview').slice(1);const m=/^step-([1-7])$/.exec(h);return m?{v:'step',n:+m[1]}:{v:['dashboard','reference','data'].includes(h)?h:'overview'}}
+function nav(){const r=route();const L=[['overview','Overview'],['dashboard','Dashboard'],...STEPS.map(s=>['step-'+s.n,'Step '+s.n]),['reference','Reference'],['data','Data']];
  $('#nav').innerHTML=L.map(([h,t])=>`<a href="#${h}" ${((r.v==='step'&&h==='step-'+r.n)||r.v===h)?'aria-current="page"':''}>${t}</a>`).join('')}
 function subProg(n){const v=V['sub_'+n]||{};const k=STEPS[n-1].sub.length;let d=0;for(let i=1;i<=k;i++)if(v['s'+i])d++;return [d,k]}
 const pc=x=>Math.round(x*100);
@@ -733,11 +777,79 @@ function dataView(){const dl=!!ST.dl;
  <label class="lb" for="tn" style="font-weight:700">Team workspace name</label><p class="hl">Letters, digits and hyphens. Anyone with access to this page who enters the same name edits the same MDMP.</p>
  <div class="row"><input class="in" id="tn" style="max-width:260px" value="${ST.ws.startsWith('team:')?esc(ST.ws.slice(5)):''}"><button class="btn" data-act="wst">Open team workspace</button></div></div>
  <div class="card"><h3>Backup and transfer</h3><p class="hl">Export everything (including images) as JSON, then import it in another workspace or browser.</p>
- <div class="row">${dl||standalone()?'<button class="btn p" data-act="xjson">Download JSON</button>':''}<button class="btn" data-act="cjson">Copy JSON</button><label class="btn" for="ijf">Import file</label><input type="file" id="ijf" accept=".json,application/json" hidden><button class="btn" data-act="pjson">Paste JSON</button></div>
+ <div class="row">${dl||standalone()?'<button class="btn p" data-act="xjson">Download JSON</button>':''}<button class="btn" data-act="cjson">Copy JSON</button><label class="btn" for="ijf">Import file</label><input type="file" id="ijf" hidden><button class="btn" data-act="pjson">Paste JSON</button></div>
  <h3 style="margin-top:22px">Reset</h3><p class="hl">Erase every field of the current workspace.</p><button class="btn x" data-act="reset">Erase workspace</button></div></div>`}
+/* ---------- DASHBOARD (read-only view of the existing data) ---------- */
+function clsColor(t){t=String(t||'').toUpperCase();return /TOP SECRET/.test(t)?'#ff8c00':/SECRET/.test(t)?'#c8102e':/CONFIDENTIAL/.test(t)?'#0033a0':/\bCUI\b/.test(t)?'#502b85':'#007a33'}
+const card=(cls,title,src,href,body)=>`<section class="dc ${cls}"><header><span class="t">${esc(title)}</span>${src?`<span class="src">${esc(src)}</span>`:''}${href?`<a href="${href}">Open</a>`:''}</header><div class="bd">${body}</div></section>`;
+const emp=t=>`<p class="emp">${esc(t||'Not yet developed')}</p>`;
+const ul=a=>a.length?`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'';
+const txtP=v=>String(v||'').split('\n').filter(x=>x.trim()).map(x=>/^\s*\[[^\]]+\]\s*$/.test(x)?`<p class="hl">${esc(x)}</p>`:`<p>${esc(x)}</p>`).join('');
+function dashboard(){
+ const sp=STEPS.map(s=>subProg(s.n));const tot=sp.reduce((a,x)=>a+x[1],0),dn=sp.reduce((a,x)=>a+x[0],0);
+ const cur=(STEPS.find((s,i)=>sp[i][0]<sp[i][1])||STEPS[6]).n;
+ const decks=Object.keys(DECKS);const ready=decks.filter(d=>deckFill(d)>=1).length;
+ const asm=Array.isArray(V.assumptions)?V.assumptions.filter(r=>String(r.a||'').trim()):[];const openA=asm.filter(r=>(r.st||'Open')==='Open').length;
+ const cs=coas(),rt=retained(),rec=coaName(V.rec_coa),app=coaName(V.approved_coa);
+ const tl=Array.isArray(V.timeline)?V.timeline.filter(r=>String(r.ev||'').trim()||String(r.dtg||'').trim()):[];
+ const spec=lines(V.t_spec),impl=lines(V.t_impl),ess=lines(V.t_ess),onord=lines(V.t_onorder);
+ const pir=lines(V.pir),ffir=lines(V.ffir),eefi=lines(V.eefi);
+ const risk=Array.isArray(V.risk)?V.risk.filter(r=>String(r.hz||'').trim()):[];
+ const kpi=(n,l,sub,href)=>`<a class="kpi" href="${href}"><b>${esc(n)}</b><span>${esc(l)}</span>${sub?`<small>${esc(sub)}</small>`:''}</a>`;
+ const st=s=>s>=1?'<span class="pill g">Complete</span>':s>0?'<span class="pill a">In progress</span>':'<span class="pill">Not started</span>';
+ // mission and intent
+ const intentSrc=has('fpg_intent')?'fpg_intent':null;
+ const intent=intentSrc?txtP(V.fpg_intent):(has('ci')?[['Expanded purpose',V.ci_purpose],['Key tasks',null],['End state',V.ci_end]].map(([h,v])=>h==='Key tasks'?(lines(V.ci_keytasks).length?`<p><b>Key tasks</b></p>${ul(lines(V.ci_keytasks))}`:''):(String(v||'').trim()?`<p><b>${h}</b></p>${txtP(v)}`:'')).join(''):emp());
+ const missionBody=`<p class="hl" style="margin:0 0 4px">Mission statement</p>${has('mission')?txtP(V.mission):emp()}<p class="hl" style="margin:12px 0 4px">Commander's intent${intentSrc?' (refined, step 6)':''}</p>${intent}${has('hq1_mission')?`<p class="hl" style="margin:12px 0 4px">Higher headquarters' mission</p>${txtP(V.hq1_mission)}`:''}`;
+ // products
+ const prods=decks.map(d=>{const D=DECKS[d],p=deckFill(d);const miss=D.items.filter(it=>{const f=itemFill(it);return f!==null&&f<1}).map(it=>it.t);
+  return `<div class="prod"><span class="nm">${esc(D.n)} <span class="pill ${D.k==='b'?'a':'g'}">Step ${D.s}</span></span><span class="row" style="gap:6px"><span class="num" style="font-weight:700">${pc(p)} %</span><button class="btn s ${D.k==='b'?'a':''}" data-act="present" data-id="${d}">Present</button></span><span class="bar"><i style="width:${pc(p)}%;background:var(--${D.k==='b'?'amber':'green'})"></i></span>${miss.length?`<span class="miss">Missing: ${esc(miss.slice(0,3).join(' · '))}${miss.length>3?` · +${miss.length-3}`:''}</span>`:''}</div>`}).join('');
+ // lane
+ const lane=`<div class="lane">${STEPS.map((s,i)=>{const [d,k]=sp[i];return `<a href="#step-${s.n}" class="${s.n===cur?'cur':''}"><div class="n">Step ${s.n}</div><div class="tt">${esc(s.t)}</div><div class="bar"><i style="width:${pc(d/k)}%"></i></div><div class="row" style="justify-content:space-between;margin-top:6px"><span class="prog">${d}/${k}</span>${st(d/k)}</div></a>`}).join('')}</div>`;
+ // next actions: missing required items for decks of the current step (or of the first incomplete deck)
+ const cdecks=STEPS[cur-1].decks.length?STEPS[cur-1].decks:['dec'];const acts=[];
+ for(const d of cdecks)DECKS[d].items.forEach(it=>{const f=itemFill(it);if(f!==null&&f<1)acts.push([DECKS[d].n,it.t])});
+ const subLeft=STEPS[cur-1].sub.map((x,i)=>[i,x[0]]).filter(([i])=>!(V['sub_'+cur]||{})['s'+(i+1)]);
+ const next=`<p class="hl" style="margin:0 0 6px">Step ${cur} — ${esc(STEPS[cur-1].t)}</p>${subLeft.length?`<p><b>Sub-steps remaining</b></p>${ul(subLeft.map(([i,t])=>(i+1)+'. '+t))}`:''}${acts.length?`<p style="margin-top:10px"><b>Items still empty in the briefing</b></p>${ul(acts.slice(0,8).map(([d,t])=>d+' — '+t))}${acts.length>8?`<p class="hl">+${acts.length-8} more</p>`:''}`:''}${!subLeft.length&&!acts.length?'<p>Nothing outstanding for this step.</p>':''}`;
+ // timeline
+ const tlBody=tl.length?`<div class="tw"><table class="dt stack"><thead><tr><th>Event</th><th>Date-time group</th><th>HOPES-W</th></tr></thead><tbody>${tl.map(r=>`<tr><td>${esc(r.ev)}${r.rem?`<br><span class="hl">${esc(r.rem)}</span>`:''}</td><td class="num">${esc(r.dtg)}</td><td>${r.cat?`<span class="pill b">${esc(r.cat)}</span>`:''}</td></tr>`).join('')}</tbody></table></div>`:emp('No timeline entries');
+ // tasks / ccir / assumptions / risk
+ const tasks=`<div class="row" style="gap:6px;margin-bottom:8px"><span class="pill b">${spec.length} specified</span><span class="pill b">${impl.length} implied</span><span class="pill g">${ess.length} essential</span>${onord.length?`<span class="pill">${onord.length} on-order / BP</span>`:''}</div>${ess.length?`<p><b>Essential</b></p>${ul(ess)}`:spec.length?`<p><b>Specified</b></p>${ul(spec.slice(0,5))}${spec.length>5?`<p class="hl">+${spec.length-5} more</p>`:''}`:emp()}`;
+ const ccir=`<div class="row" style="gap:6px;margin-bottom:8px"><span class="pill b">${pir.length} PIR</span><span class="pill b">${ffir.length} FFIR</span><span class="pill">${eefi.length} EEFI</span></div>${pir.length?`<p><b>PIR</b></p>${ul(pir)}`:''}${ffir.length?`<p><b>FFIR</b></p>${ul(ffir)}`:''}${eefi.length?`<p><b>EEFI</b></p>${ul(eefi)}`:''}${!pir.length&&!ffir.length&&!eefi.length?emp():''}`;
+ const aBody=asm.length?`<table class="dt"><tbody>${asm.map(r=>{const s=r.st||'Open';return `<tr><td>${esc(r.a)}</td><td><span class="pill ${s==='Confirmed'?'g':s==='Denied'?'r':'a'}">${esc(s)}</span></td></tr>`}).join('')}</tbody></table>`:emp('No assumptions');
+ const rBody=risk.length?`<table class="dt"><tbody>${risk.map(r=>`<tr><td>${esc(r.hz)}${r.ct?`<br><span class="hl">Controls: ${esc(r.ct)}</span>`:''}</td><td>${r.lv?`<span class="pill a">${esc(r.lv)}</span>`:''}</td></tr>`).join('')}</tbody></table>`:emp('No risk entries');
+ // COAs
+ const mx=mxCalc();
+ const coaBody=cs.length?`<div class="coac">${cs.map(c=>{const sc=V['coa.'+c.id+'.screen']||{};const isR=V['coa.'+c.id+'.retained']!==false;const t=mx&&mx.tot[c.id];
+  return `<div><div class="nm">${esc(c.name)}</div><div class="row" style="gap:4px">${isR?'<span class="pill b">Retained</span>':'<span class="pill">Not retained</span>'}${V.rec_coa===c.id?'<span class="pill a">Recommended</span>':''}${V.approved_coa===c.id?'<span class="pill g">Approved</span>':''}</div>
+  <div class="scr">${SCREEN.map(([k])=>`<span class="${sc[k]?'on':''}" title="${esc(k)}">${esc(k[0].toUpperCase())}</span>`).join('')}</div>
+  <p style="font-size:14px">${has('coa.'+c.id+'.statement')?esc(String(V['coa.'+c.id+'.statement']).slice(0,180))+(String(V['coa.'+c.id+'.statement']).length>180?'…':''):'<span class="emp">No statement yet</span>'}</p>
+  ${t?`<p class="hl" style="margin:0">Weighted total ${t.w} · unweighted ${t.u}${mx.best===c.id?' — lowest':''}</p>`:''}</div>`}).join('')}</div><p class="hl" style="margin-top:8px">Screening: F feasible · A acceptable · S suitable · D distinguishable · C complete</p>`:emp('No COA developed yet');
+ // intake
+ const I=V.intake;const ixBody=I&&I.docs?`<p>${esc(I.docs.length)} document${I.docs.length>1?'s':''} read for <b>${esc(I.unit)}</b></p>${ul(I.docs.map(d=>roleShort(d.role)+' — '+d.name))}<p class="hl">${I.applied?`Applied ${esc(fmtDT(I.applied))} · ${I.appliedN} fields filled`:`${I.props?I.props.length:0} proposals awaiting review`}</p>`:emp('No higher order loaded');
+ const hdr=`${V.hdr_class?`<div class="cls" style="background:${clsColor(V.hdr_class)}">${esc(V.hdr_class)}</div>`:''}
+ <div class="dbh"><div><h1>${esc(V.hdr_op||'Planning dashboard')}</h1><div class="meta">${esc([V.hdr_unit,V.hdr_hhq?'Higher HQ: '+V.hdr_hhq:''].filter(Boolean).join(' · ')||'Set the exercise header in Overview')}</div></div><span class="live"><i></i><span>${esc($('#sav').textContent)}</span></span></div>`;
+ return hdr+`<div class="db">
+ ${kpi(pc(tot?dn/tot:0)+' %','MDMP progress',dn+' of '+tot+' sub-steps','#step-'+cur)}
+ ${kpi('Step '+cur,'Current step',STEPS[cur-1].t,'#step-'+cur)}
+ ${kpi(ready+' / '+decks.length,'Products complete','briefings and orders','#overview')}
+ ${kpi(String(spec.length),'Specified tasks',ess.length+' essential','#step-2')}
+ ${kpi(String(openA),'Open assumptions',asm.length+' in total','#step-2')}
+ ${kpi(String(cs.length),'Courses of action',app?'Approved: '+app:rec?'Recommended: '+rec:rt.length+' retained','#step-'+(cs.length?5:3))}
+ ${card('','MDMP progress','Sub-steps by step','',lane)}
+ <div class="dcol c7">${card('','Mission and intent','Steps 2 and 6','#step-2',missionBody)}${card('','Next actions','Step '+cur,'#step-'+cur,next)}</div>
+ <div class="dcol c5">${card('','Products','Live from all steps','',prods)}${card('','Operational and planning timeline','Steps 1 and 2','#step-1',tlBody)}</div>
+ ${card('s3','Tasks','Step 2','#step-2',tasks)}
+ ${card('s3','CCIRs and EEFIs','Step 2','#step-2',ccir)}
+ ${card('s3','Assumptions','Step 2','#step-2',aBody)}
+ ${card('s3','Risk','Step 2','#step-2',rBody)}
+ ${card('s8','Courses of action','Steps 3 to 6','#step-3',coaBody)}
+ ${card('s4','Higher order','Intake','#overview',ixBody)}
+ </div>`}
 function render(){nav();strip();const r=route();const v=$('#view');
- v.innerHTML=r.v==='step'?stepView(r.n):r.v==='reference'?reference():r.v==='data'?dataView():overview();
- document.title=(r.v==='step'?'Step '+r.n+' · ':'')+'MDMP Restitution Tool'}
+ $('#strip').hidden=r.v==='dashboard';document.body.classList.toggle('dbv',r.v==='dashboard');
+ v.innerHTML=r.v==='step'?stepView(r.n):r.v==='dashboard'?dashboard():r.v==='reference'?reference():r.v==='data'?dataView():overview();
+ document.title=(r.v==='step'?'Step '+r.n+' · ':r.v==='dashboard'?'Dashboard · ':'')+'MDMP Restitution Tool'}
 
 /* ---------- EVENTS ---------- */
 function tableSet(id,r,c,val){const rows=(Array.isArray(V[id])?V[id]:[]).map(x=>x._id===r?{...x,[c]:val}:x);setV(id,rows)}
@@ -957,33 +1069,77 @@ async function readPDF(f,rec){const lib=await pdfjs();const doc=await lib.getDoc
   else parts.push('[page '+i+']\n'+t);
   ixStat(rec,'Reading… page '+i+' / '+doc.numPages)}
  rec.text=parts.join('\n\n')}
-async function unzip(buf,name){const dv=new DataView(buf);let e=buf.byteLength-22;while(e>=0&&dv.getUint32(e,true)!==0x06054b50)e--;if(e<0)throw new Error('Not a valid .docx file');
- const n=dv.getUint16(e+10,true);let p=dv.getUint32(e+16,true);const td=new TextDecoder();
- for(let i=0;i<n;i++){const m=dv.getUint16(p+10,true),cs=dv.getUint32(p+20,true),fl=dv.getUint16(p+28,true),xl=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),lo=dv.getUint32(p+42,true);
-  if(td.decode(new Uint8Array(buf,p+46,fl))===name){const data=new Uint8Array(buf,lo+30+dv.getUint16(lo+26,true)+dv.getUint16(lo+28,true),cs);
-   if(m===0)return td.decode(data);if(m!==8)throw new Error('Unsupported compression');
-   return td.decode(await new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())}
-  p+=46+fl+xl+cl}return null}
-async function readDOCX(f){const xml=await unzip(await f.arrayBuffer(),'word/document.xml');if(!xml)throw new Error('No document text found');
- const d=new DOMParser().parseFromString(xml,'application/xml');const out=[];
- const tx=n=>{let s='';for(const c of n.childNodes){if(c.nodeType!==1)continue;const l=c.localName;if(l==='t')s+=c.textContent;else if(l==='tab')s+='\t';else if(l==='br'||l==='cr')s+='\n';else if(l!=='pPr'&&l!=='rPr')s+=tx(c)}return s};
- const walk=n=>{for(const c of n.childNodes){if(c.nodeType!==1)continue;const l=c.localName;
-  if(l==='p'){const t=tx(c);if(t.trim())out.push(t)}
-  else if(l==='tbl'){for(const tr of c.childNodes){if(tr.nodeType!==1||tr.localName!=='tr')continue;const cells=[];for(const tc of tr.childNodes)if(tc.nodeType===1&&tc.localName==='tc')cells.push([...tc.childNodes].filter(x=>x.nodeType===1&&x.localName==='p').map(tx).join(' ').trim());if(cells.some(Boolean))out.push(cells.join(' | '))}}
-  else walk(c)}};
- const body=d.getElementsByTagNameNS('*','body')[0];if(!body)throw new Error('No document body');walk(body);return out.join('\n')}
+/* readers: detection by signature, any format */
+let PAKO;const loadPako=()=>PAKO||(PAKO=new Promise((res,rej)=>{if(window.pako)return res(window.pako);const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako_inflate.min.js';sc.onload=()=>window.pako?res(window.pako):rej(new Error('inflate'));sc.onerror=()=>{PAKO=null;rej(new Error('Decompression module could not load'))};document.head.appendChild(sc)}));
+async function inflate(data){if(typeof DecompressionStream==='function'){try{return new Uint8Array(await new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())}catch(e){}}
+ const p=await loadPako();return p.inflateRaw(data)}
+function zipIndex(buf){const dv=new DataView(buf);let e=buf.byteLength-22;const stop=Math.max(0,e-70000);while(e>=stop&&dv.getUint32(e,true)!==0x06054b50)e--;if(e<stop)throw new Error('Damaged archive');
+ const n=dv.getUint16(e+10,true);let p=dv.getUint32(e+16,true);const td=new TextDecoder();const out={};
+ for(let i=0;i<n&&p+46<=buf.byteLength;i++){const m=dv.getUint16(p+10,true),cs=dv.getUint32(p+20,true),fl=dv.getUint16(p+28,true),xl=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),lo=dv.getUint32(p+42,true);
+  out[td.decode(new Uint8Array(buf,p+46,fl))]={m,cs,lo};p+=46+fl+xl+cl}return out}
+async function zipText(buf,idx,name){const z=idx[name];if(!z)return null;const dv=new DataView(buf);const st=z.lo+30+dv.getUint16(z.lo+26,true)+dv.getUint16(z.lo+28,true);const data=new Uint8Array(buf,st,z.cs);
+ if(z.m===0)return new TextDecoder().decode(data);if(z.m!==8)return null;return new TextDecoder().decode(await inflate(data))}
+const xmlDoc=t=>new DOMParser().parseFromString(t,'application/xml');
+const kids=(n,l)=>[...n.childNodes].filter(c=>c.nodeType===1&&(!l||c.localName===l));
+const byNum=re=>(a,b)=>(+(re.exec(a)||[0,0])[1])-(+(re.exec(b)||[0,0])[1]);
+function wText(n){let s='';for(const c of kids(n)){const l=c.localName;if(l==='t')s+=c.textContent;else if(l==='tab')s+='\t';else if(l==='br'||l==='cr')s+='\n';else if(l!=='pPr'&&l!=='rPr'&&l!=='instrText')s+=wText(c)}return s}
+function wBody(root){const out=[];const walk=n=>{for(const c of kids(n)){const l=c.localName;
+  if(l==='p'){const t=wText(c);if(t.trim())out.push(t)}
+  else if(l==='tbl'){for(const tr of kids(c,'tr')){const cells=kids(tr,'tc').map(tc=>kids(tc,'p').map(wText).join(' ').trim());if(cells.some(Boolean))out.push(cells.join(' | '))}}
+  else walk(c)}};walk(root);return out.join('\n')}
+async function readWord(buf,idx){const parts=[];const body=xmlDoc(await zipText(buf,idx,'word/document.xml')).getElementsByTagNameNS('*','body')[0];if(body)parts.push(wBody(body));
+ for(const nm of ['word/footnotes.xml','word/endnotes.xml']){const x=await zipText(buf,idx,nm);if(x){const t=wBody(xmlDoc(x).documentElement);if(t.trim())parts.push('[notes]\n'+t)}}return parts.join('\n\n')}
+async function readSlides(buf,idx){const re=/slide(\d+)\.xml$/;const out=[];const para=d=>[...d.getElementsByTagNameNS('*','p')].map(p=>[...p.getElementsByTagNameNS('*','t')].map(t=>t.textContent).join('')).filter(x=>x.trim()).join('\n');
+ for(const nm of Object.keys(idx).filter(k=>/^ppt\/slides\/slide\d+\.xml$/.test(k)).sort(byNum(re))){const t=para(xmlDoc(await zipText(buf,idx,nm)));if(t.trim())out.push('[slide '+re.exec(nm)[1]+']\n'+t)}
+ for(const nm of Object.keys(idx).filter(k=>/^ppt\/notesSlides\/notesSlide\d+\.xml$/.test(k)).sort(byNum(/notesSlide(\d+)/))){const t=para(xmlDoc(await zipText(buf,idx,nm)));if(t.trim())out.push('[notes '+/notesSlide(\d+)/.exec(nm)[1]+']\n'+t)}return out.join('\n\n')}
+async function readSheets(buf,idx){const ss=[];const sx=await zipText(buf,idx,'xl/sharedStrings.xml');if(sx)for(const si of xmlDoc(sx).getElementsByTagNameNS('*','si'))ss.push([...si.getElementsByTagNameNS('*','t')].map(t=>t.textContent).join(''));
+ let names=[];const wb=await zipText(buf,idx,'xl/workbook.xml');if(wb)names=[...xmlDoc(wb).getElementsByTagNameNS('*','sheet')].map(x=>x.getAttribute('name'));
+ const re=/sheet(\d+)\.xml$/;const out=[];
+ for(const nm of Object.keys(idx).filter(k=>/^xl\/worksheets\/sheet\d+\.xml$/.test(k)).sort(byNum(re))){const d=xmlDoc(await zipText(buf,idx,nm));const rows=[];
+  for(const r of d.getElementsByTagNameNS('*','row')){const cells=kids(r,'c').map(c=>{const t=c.getAttribute('t');if(t==='inlineStr')return [...c.getElementsByTagNameNS('*','t')].map(x=>x.textContent).join('');const v=kids(c,'v')[0];if(!v)return '';return t==='s'?(ss[+v.textContent]||''):v.textContent}).map(x=>x.trim());if(cells.some(Boolean))rows.push(cells.filter(Boolean).join(' | '))}
+  if(rows.length)out.push('[sheet '+(names[+re.exec(nm)[1]-1]||re.exec(nm)[1])+']\n'+rows.join('\n'))}return out.join('\n\n')}
+async function readODF(buf,idx){const d=xmlDoc(await zipText(buf,idx,'content.xml'));const out=[];
+ const walk=n=>{for(const c of kids(n)){const l=c.localName;if(l==='p'||l==='h'){const t=c.textContent;if(t.trim())out.push(t)}else if(l==='table-row'){const cells=kids(c,'table-cell').map(x=>x.textContent.trim());if(cells.some(Boolean))out.push(cells.filter(Boolean).join(' | '))}else walk(c)}};walk(d.documentElement);return out.join('\n')}
+async function readZip(buf){const idx=zipIndex(buf);
+ if(idx['word/document.xml'])return readWord(buf,idx);if(Object.keys(idx).some(k=>k.startsWith('ppt/slides/')))return readSlides(buf,idx);
+ if(Object.keys(idx).some(k=>k.startsWith('xl/worksheets/')))return readSheets(buf,idx);if(idx['content.xml'])return readODF(buf,idx);
+ const out=[];for(const nm of Object.keys(idx).filter(k=>/\.(xml|txt|html?)$/i.test(k)).slice(0,60)){const t=await zipText(buf,idx,nm);if(t){const x=t.replace(/<[^>]+>/g,' ').replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n').trim();if(x.length>20)out.push('['+nm+']\n'+x)}}return out.join('\n\n')}
+function readRTF(t){let out='',i=0,depth=0,skip=0;const SK=/^(fonttbl|colortbl|stylesheet|info|listtable|listoverridetable|generator|pict|themedata|colorschememapping|latentstyles|datastore|xmlnstbl|rsidtbl|header|headerl|headerr|footer|footerl|footerr|object|filetbl|revtbl)$/;
+ while(i<t.length){const c=t[i];
+  if(c==='{'){depth++;const m=/^\{\\(\*|[a-z]+)/i.exec(t.slice(i,i+40));if(!skip&&m&&(m[1]==='*'||SK.test(m[1])))skip=depth;i++;continue}
+  if(c==='}'){if(skip===depth)skip=0;depth--;i++;continue}
+  if(skip){i++;continue}
+  if(c==='\\'){const r=/^\\([a-z]+)(-?\d+)? ?|^\\'([0-9a-f]{2})|^\\([\s\S])/i.exec(t.slice(i,i+40));if(!r){i++;continue}
+   if(r[3])out+=String.fromCharCode(parseInt(r[3],16));
+   else if(r[1]){const w=r[1].toLowerCase();if(['par','line','row','sect','page'].includes(w))out+='\n';else if(w==='cell'||w==='tab')out+=' | ';
+    else if(w==='u'&&r[2]){out+=String.fromCharCode((+r[2]+65536)%65536);i+=r[0].length;if(t[i]==='\\'&&t[i+1]==="'")i+=4;else if(t[i]!=='\\'&&t[i]!=='{'&&t[i]!=='}')i++;continue}}
+   else if(r[4]){if('\\{}'.includes(r[4]))out+=r[4];else if(r[4]==='~')out+=' '}
+   i+=r[0].length;continue}
+  if(c!=='\r'&&c!=='\n')out+=c;i++}
+ return out.replace(/[ \t]+/g,' ').replace(/ ?\| ?(?=\n|$)/g,'').replace(/\n\s*\n+/g,'\n').trim()}
+function readHTML(t){const d=new DOMParser().parseFromString(t,'text/html');d.querySelectorAll('script,style,noscript').forEach(x=>x.remove());d.querySelectorAll('br').forEach(x=>x.replaceWith('\n'));d.querySelectorAll('p,div,li,tr,h1,h2,h3,h4,h5,h6,table').forEach(x=>x.append('\n'));d.querySelectorAll('td,th').forEach(x=>x.append(' | '));return (d.body?d.body.textContent:'').replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n').trim()}
+function rawStrings(u8){const ok=c=>(c>=32&&c<127)||(c>=0xC0&&c<=0x24F&&c!==0xFF)||c===9||c===10||c===13;
+ const good=t=>{const L=(t.match(/[A-Za-zÀ-ɏ]/g)||[]).length;return L>=4&&L/t.length>=0.45&&!/(.)\1{5,}/.test(t)};
+ const runs=[];const scan=(step,off)=>{let cur='';const push=()=>{for(const x of cur.split(/[\r\n]+/)){const t=x.trim();if(good(t))runs.push(t)}cur=''};
+  for(let i=off;i+step-1<u8.length;i+=step){const c=step===2?u8[i]|(u8[i+1]<<8):u8[i];if(ok(c))cur+=String.fromCharCode(c);else push()}push()};
+ scan(2,0);scan(2,1);scan(1,0);const seen=new Set();return runs.filter(x=>!seen.has(x)&&seen.add(x)).join('\n')}
+function looksText(u8){const n=Math.min(u8.length,65536);if(!n)return false;let bad=0;for(let i=0;i<n;i++){const c=u8[i];if(c===0)return false;if(c<9||(c>13&&c<32))bad++}return bad/n<0.02}
+async function toJPEG(f){const bmp=await createImageBitmap(f);const k=Math.min(1,2400/Math.max(bmp.width,bmp.height));const c=document.createElement('canvas');c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(bmp,0,0,c.width,c.height);return new Promise((r,j)=>c.toBlob(b=>b?r(b):j(new Error('Image not readable')),'image/jpeg',0.88))}
+async function readAny(f,rec){const buf=await f.arrayBuffer();const u8=new Uint8Array(buf);const h=String.fromCharCode(...u8.slice(0,12));const low=rec.name.toLowerCase();
+ if(h.startsWith('%PDF')||low.endsWith('.pdf'))return readPDF(new Blob([buf]),rec);
+ if(u8[0]===0x50&&u8[1]===0x4B&&u8[2]===3&&u8[3]===4){rec.kind='archive';rec.text=await readZip(buf);return}
+ const img=/^image\//.test(f.type||'')||(u8[0]===0xFF&&u8[1]===0xD8)||h.startsWith('\x89PNG')||h.startsWith('GIF8')||(h.startsWith('RIFF')&&h.slice(8,12)==='WEBP')||/ftyp(heic|heix|mif1|avif)/.test(String.fromCharCode(...u8.slice(4,12)));
+ if(img){const okT=['image/jpeg','image/png','image/webp','image/gif'];rec.imgs=[okT.includes(f.type)?f:await toJPEG(f).catch(()=>{throw new Error('Image format not readable in this browser — convert it to JPEG or PNG')})];rec.pages=1;return}
+ if(h.startsWith('{\\rtf')){rec.text=readRTF(new TextDecoder('latin1').decode(u8));return}
+ if(looksText(u8)){let t=new TextDecoder().decode(u8);if(t.includes(String.fromCharCode(0xFFFD)))t=new TextDecoder('windows-1252').decode(u8);rec.text=/^\s*<(!doctype html|html|\?xml|[a-z]+:)/i.test(t)||/\.(html?|xml|xhtml|mht)$/.test(low)?(/<html/i.test(t)?readHTML(t):t.replace(/<[^>]+>/g,' ').replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n').trim()):t;return}
+ rec.text=rawStrings(u8);rec.note='text recovered from a binary file — check the proposals';if(rec.text.replace(/[^A-Za-zÀ-ÿ]/g,'').length<40)throw new Error('No readable text — save it as PDF or Word .docx')}
 async function ixAdd(f){const rec={id:uid(),name:f.name||'Pasted text',role:ROLES[0],text:'',pages:0,imgs:[],status:'Reading…',note:'',res:[]};IX.files.push(rec);ixDraw();
  const low=rec.name.toLowerCase();
- try{if(/\.pdf$/.test(low)||f.type==='application/pdf')await readPDF(f,rec);
-  else if(/\.docx$/.test(low))rec.text=await readDOCX(f);
-  else if(/\.(txt|md|text|csv)$/.test(low)||(f.type||'').startsWith('text/'))rec.text=await f.text();
-  else if((f.type||'').startsWith('image/')){rec.imgs=[f];rec.pages=1}
-  else if(/\.(doc|pptx?|odt|rtf)$/.test(low))throw new Error('Save it as PDF or Word .docx first');
-  else throw new Error('Unsupported format');
+ try{await readAny(f,rec);
   rec.role=ixGuess(rec.name,rec.text);
   if(!rec.text.trim()&&!rec.imgs.length)throw new Error('No readable text');
   rec.status='Ready'+(rec.imgs.length&&rec.text?' (some scanned pages)':rec.imgs.length?' (images)':'')}
- catch(e){rec.status='Not readable';rec.note=e.message||String(e)}
+ catch(e){rec.status='Not readable';rec.note=(e&&e.message)||'Unreadable file'}
  ixDraw()}
 function ixStat(rec,t){rec.status=t;const el=$(`[data-ixs="${rec.id}"]`);if(el)el.textContent=t}
 function chunks(t,max){const out=[];let cur='';for(const part of t.split(/\n\n(?=\[page )/)){if(cur&&(cur.length+part.length)>max){out.push(cur);cur=''}
@@ -1077,7 +1233,7 @@ function intakeCard(){const I=V.intake;const can=!!ST.sm;
  return `<div class="card ic" id="intake"><h3>Higher order — OPORD and annexes</h3>
  <p class="hl" style="margin-top:6px">Drop the order issued by your higher headquarters and its annexes. Claude reads them and proposes the higher mission, intent and concept, your specified and on-order tasks, constraints, task organization, timeline, enemy situation, CCIRs, coordinating instructions, sustainment and signal. Only what the documents state is taken, with its paragraph reference.</p>
  ${W('hdr_unit',{l:'Your unit, as designated in the order'})}
- <div class="drop" id="drop"><label class="btn" for="ixf">Choose files</label><input type="file" id="ixf" multiple accept=".pdf,.docx,.txt,.md,image/*,application/pdf" hidden><span class="hl" style="margin:0">or drop them here — PDF, Word .docx, text, page photos</span></div>
+ <div class="drop" id="drop"><label class="btn" for="ixf">Choose files</label><input type="file" id="ixf" multiple hidden><span class="hl" style="margin:0">or drop them here — any format: PDF, Word, Excel, PowerPoint, OpenDocument, RTF, HTML, text, e-mail, page photos</span></div>
  <details class="ls"><summary>Paste text instead</summary><textarea class="in" id="ixt" rows="5" aria-label="Order text"></textarea><div class="row" style="margin-top:6px"><button class="btn s" data-act="ixpaste">Add as a document</button></div></details>
  ${rows?`<div class="tw"><table class="ed stack" style="margin-top:10px"><thead><tr><th>File</th><th>Document</th><th>Content</th><th>Status</th><th><span hidden>Remove</span></th></tr></thead><tbody>${rows}</tbody></table></div>`:''}
  <div class="row" style="margin-top:10px"><button class="btn p" data-act="ixgo" ${IX.busy||!can||!IX.files.length?'disabled':''}>${IX.busy?'Extracting…':'Extract and propose'}</button>${IX.busy?'<button class="btn" data-act="ixstop">Stop</button>':''}</div>

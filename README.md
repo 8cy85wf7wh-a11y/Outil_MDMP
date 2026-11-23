@@ -13,7 +13,8 @@ La structure suit le QRG (le plus récent). Les éléments ajoutés depuis le CA
 
 ## Fonctions
 
-- **Dépôt de l'ordre de l'échelon supérieur** (OPORD, FRAGORD, WARNORD, annexes A à V) : PDF, Word .docx, texte ou photos de pages. Claude extrait les éléments destinés à l'unité désignée (mission, intention et concept du supérieur, tâches explicites, missions sur ordre, contraintes, articulation, chronologie, ennemi, CCIR, coordination, soutien, transmissions), chacun avec sa référence de paragraphe. Revue champ par champ avant application.
+- **Tableau de bord** (onglet *Dashboard*) : vue en lecture seule des données saisies — bandeau de classification, indicateurs clés, avancement par étape, mission et intention, état des produits avec rubriques manquantes, prochaines actions, chronologie, tâches, CCIR/EEFI, hypothèses, risques, COA et matrice de décision, ordre supérieur chargé.
+- **Dépôt de l'ordre de l'échelon supérieur** (OPORD, FRAGORD, WARNORD, annexes A à V), tout format : PDF, Word, Excel, PowerPoint (Open XML), OpenDocument, RTF, HTML, texte, anciens formats Office binaires, photos de pages. Claude extrait les éléments destinés à l'unité désignée (mission, intention et concept du supérieur, tâches explicites, missions sur ordre, contraintes, articulation, chronologie, ennemi, CCIR, coordination, soutien, transmissions), chacun avec sa référence de paragraphe. Revue champ par champ avant application.
 - **7 étapes** : sous-étapes du QRG, sorties clés (CALL, tableau 3-1), leçons CALL, formulaires de travail (assistant d'énoncé de mission, fiches COA, critères de sélection, fiche de wargame, matrice de décision pondérée).
 - **Restitutions** dans l'ordre doctrinal : Mission Analysis Brief, COA Brief, COA Analysis Brief (optionnel), COA Decision Brief, OPORD Brief, WARNORD 1 à 3. Taux de complétude, éléments manquants affichés « Not yet developed ».
 - **Exports** : présentation plein écran, PowerPoint (.pptx), HTML imprimable en PDF, texte.
@@ -26,11 +27,11 @@ La structure suit le QRG (le plus récent). Les éléments ajoutés depuis le CA
 | Artefact Claude (claude.ai) | Compte Claude | Oui (usage Claude de l'utilisateur) | Oui |
 | Fichier ouvert dans un navigateur ou hébergé (GitHub Pages…) | Navigateur local | Non | Oui (téléchargement direct) |
 
-Hors de Claude, ouvrir `index.html` dans un navigateur récent. Une connexion internet est nécessaire pour les polices, le module PowerPoint (pptxgenjs 4.0.1) et le lecteur PDF (pdf.js 4.10.38), chargés depuis jsDelivr.
+Hors de Claude, ouvrir `index.html` dans un navigateur récent. Une connexion internet est nécessaire pour les polices, le module PowerPoint (pptxgenjs 4.0.1), le lecteur PDF (pdf.js 4.10.38) et, sur les navigateurs anciens, le module de décompression (pako 2.1.0), chargés depuis jsDelivr.
 
 ## Limites
 
 - L'extraction ne produit ni tâches implicites ni conclusions d'IPOE : elles relèvent de l'analyse d'état-major.
 - Les tableaux 4-1, 5-5 et 6-2 du CALL 23-07 ne sont pas repris (non disponibles en texte).
-- Formats non lus : .doc, .pptx, .odt, .rtf (convertir en PDF ou .docx). Au-delà de 40 pages scannées par document, seules les 40 premières sont envoyées.
+- Anciens formats binaires (.doc, .xls, .ppt, .msg) : seul le texte brut est récupéré, sans mise en forme, avec des fragments parasites possibles. Photos HEIC lues seulement si le navigateur sait les décoder. Au-delà de 40 pages scannées par document, seules les 40 premières sont envoyées.
 - Outil d'entraînement, non officiel.
