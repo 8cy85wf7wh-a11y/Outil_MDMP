@@ -18,7 +18,12 @@ La structure suit le QRG (le plus récent). Les éléments ajoutés depuis le CA
 - **7 étapes** : sous-étapes du QRG, sorties clés (CALL, tableau 3-1), leçons CALL, formulaires de travail (assistant d'énoncé de mission, fiches COA, critères de sélection, fiche de wargame, matrice de décision pondérée).
 - **Restitutions** dans l'ordre doctrinal : Mission Analysis Brief, COA Brief, COA Analysis Brief (optionnel), COA Decision Brief, OPORD Brief, WARNORD 1 à 3. Taux de complétude, éléments manquants affichés « Not yet developed ».
 - **Exports** : présentation plein écran, PowerPoint (.pptx), HTML imprimable en PDF, texte.
-- **Sauvegarde** : compte Claude (espace personnel ou d'équipe) ; sauvegarde et import JSON.
+- **Sauvegarde** : compte Claude (espace personnel ou d'équipe) ; copie locale dans le navigateur en attendant la synchronisation, nouvelle tentative automatique en cas de coupure ; sauvegarde et import JSON (données contrôlées à l'import).
+- **Accessibilité** : navigation clavier, lien d'évitement, cibles tactiles de 44 px, présentation plein écran sur téléphone, couleurs de bandeau de classification (UNCLASSIFIED vert, CUI violet, C bleu, S rouge, TS orange, TS/SCI jaune).
+
+## Vérification (v2.4, 24 nov. 2026)
+
+Quatre vérifications indépendantes (doctrine, ergonomie/accessibilité, code/sécurité, fonctionnel) puis tests de non-régression automatisés (Playwright, Chrome ; rendu PPTX sous LibreOffice). Corrections : libellés et contenus doctrinaux (paragraphes OPORD, IPOE, tâches tactiques, règle du tiers), matrice de décision (rangs entiers 1 à n, égalité sans COA préféré), échappement des données importées, synchronisation sans perte en cas de coupure, mise en page mobile et diapositives.
 
 ## Utilisation
 

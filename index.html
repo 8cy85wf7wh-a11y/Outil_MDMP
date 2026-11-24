@@ -15,31 +15,37 @@
    LAYOUT: strip as navigation; step view = sub-steps | work products | briefing card; slide viewer overlay for the restitution. */
 :root{color-scheme:light dark;
 --bg:light-dark(#ffffff,#0e151d);--ink:light-dark(#121b26,#e4ebf2);--mut:light-dark(#566271,#98a6b5);
---line:light-dark(#d3dae2,#283545);--card:light-dark(#f4f6f9,#141e29);--in:light-dark(#ffffff,#0f1821);
+--line:light-dark(#d3dae2,#283545);--fline:light-dark(#7b8794,#66768a);--card:light-dark(#f4f6f9,#141e29);--in:light-dark(#ffffff,#0f1821);
 --blue:light-dark(#1f4e8c,#6f9fe0);--blue-d:#1f4e8c;--blue-l:light-dark(#dce7f5,#16283d);
 --green:light-dark(#506d1f,#a3c766);--green-l:light-dark(#e7efd8,#1a2612);
 --amber:light-dark(#8a5d00,#f0c24f);--amber-l:light-dark(#fff2cc,#2e240b);
 --red:light-dark(#a3122a,#ff8a9a);--ok:light-dark(#2e7d32,#7fd483)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
-html{scroll-padding-top:72px}
+html{scroll-padding-top:calc(var(--hdr,72px) + 12px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Barlow,"Segoe UI",Arial,sans-serif;overflow-x:clip}
 h1,h2,h3,h4{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;line-height:1.08;margin:0;text-wrap:balance}
-h1{font-size:clamp(32px,4vw,46px)}h2{font-size:30px}h3{font-size:22px}h4{font-size:18px}
+h1{font-size:clamp(32px,4vw,46px)}h2{font-size:22px}h3{font-size:18px}
 a{color:var(--blue)}
 button,select,input,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.top :focus-visible,.dbar :focus-visible{outline-color:#fff}
+.nav a:focus-visible,.col:focus-visible{outline-offset:-3px}
 .top{position:sticky;top:0;z-index:20;background:var(--blue-d);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;padding:8px max(3vw,12px)}
 .brand{font-family:"Barlow Condensed",Arial,sans-serif;font-size:22px;font-weight:700;white-space:nowrap}
 .brand small{font-family:Barlow,Arial,sans-serif;font-size:13px;font-weight:500;opacity:.8;margin-left:8px}
-@media(max-width:600px){.brand small{display:none}.brand{font-size:20px}}
+@media(max-width:1500px){.brand small{display:none}}
+@media(max-width:1100px){.nav .lg{display:none}}
+.nav{position:relative;padding:3px}
+@media(max-width:600px){.top{flex-wrap:wrap;column-gap:10px}.brand{font-size:18px;flex:1 1 0;overflow:hidden;text-overflow:ellipsis}.sav{margin-left:auto;font-size:12px;flex:0 1 auto;max-width:58%;overflow:hidden;text-overflow:ellipsis}.nav{order:3;flex-basis:100%}.col .bd{padding:6px 10px}.col .bd>span.prog{display:none}.col{min-height:0}.col .hd{min-height:0;padding:6px 10px}.col .bd .chip{display:none}.strip{grid-template-columns:repeat(7,minmax(120px,1fr))}}
 .nav{display:flex;gap:4px;overflow-x:auto;flex:1 1 420px}
 .nav a{flex:none;color:#fff;text-decoration:none;padding:9px 11px;border-radius:6px;font-weight:600;font-size:15px;min-height:40px;display:flex;align-items:center}
 .nav a[aria-current=page]{background:#fff;color:var(--blue-d)}
 .nav a:hover{background:rgba(255,255,255,.15)}.nav a[aria-current=page]:hover{background:#fff}
 .sav{font-size:13px;white-space:nowrap;opacity:.9}
-.strip{display:grid;grid-template-columns:repeat(7,minmax(168px,1fr));gap:0;overflow-x:auto;scroll-snap-type:x mandatory;border-bottom:1px solid var(--line);background:var(--card)}
+.top .sav.warn{background:#fff;color:#a3122a;padding:2px 8px;border-radius:4px;opacity:1;font-weight:700}
+.strip{position:relative;display:grid;grid-template-columns:repeat(7,minmax(168px,1fr));gap:0;overflow-x:auto;scroll-snap-type:x mandatory;border-bottom:1px solid var(--line);background:var(--card)}
 .col{scroll-snap-align:start;display:flex;flex-direction:column;text-decoration:none;color:inherit;border-right:1px solid var(--line);min-height:186px}
 .col .hd{background:var(--blue-l);padding:10px 12px 8px;border-bottom:3px solid transparent;min-height:88px}
 .col[aria-current=step] .hd{background:var(--blue-d);color:#fff;border-bottom-color:var(--amber)}
@@ -50,14 +56,14 @@ button{cursor:pointer}
 .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--blue)}
 .chip{display:flex;justify-content:space-between;gap:6px;font-size:13px;font-weight:600;padding:4px 8px;border-radius:5px}
 .chip.b{background:var(--amber-l);color:var(--amber)}.chip.o{background:var(--green-l);color:var(--green)}
-.chip b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.chip b{font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}
 main{max-width:1320px;margin:0 auto;padding:clamp(20px,3vw,40px) max(3vw,14px) 60px}
 .lead{color:var(--mut);max-width:70ch;margin:8px 0 0}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
 .card+.card{margin-top:16px}.refg>.card+.card,.ov>.card+.card{margin-top:0}
 .bc{background:var(--amber-l);border-color:light-dark(#e8cf86,#5a4718)}
 .oc{background:var(--green-l);border-color:light-dark(#c4d79b,#3a5223)}
-.bc h3{color:var(--amber)}.oc h3{color:var(--green)}
+.bc h2{color:var(--amber)}.oc h2{color:var(--green)}
 .sv{display:grid;gap:24px;margin-top:20px;grid-template-columns:minmax(0,1fr)}
 @media(min-width:820px){.sv{grid-template-columns:minmax(0,270px) minmax(0,1fr)}.sv .rt{grid-column:1}.sv .wk{grid-column:2;grid-row:1 / span 3}}
 @media(min-width:1180px){.sv{grid-template-columns:minmax(0,260px) minmax(0,1fr) minmax(0,330px)}.sv .wk{grid-column:2;grid-row:1}.sv .rt{grid-column:3;grid-row:1}}
@@ -67,19 +73,20 @@ main{max-width:1320px;margin:0 auto;padding:clamp(20px,3vw,40px) max(3vw,14px) 6
 .ss{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
 .ss label{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:6px;font-size:15px;line-height:1.3;min-height:36px;cursor:pointer}
 .ss label.b{background:var(--amber-l)}.ss label.o{background:var(--green-l)}
-.ss input{margin-top:2px;width:18px;height:18px;flex:none;accent-color:var(--blue-d)}
+.ss input{margin-top:2px;width:18px;height:18px;flex:none;accent-color:var(--blue)}
 .ss .k{font-weight:700;color:var(--mut);min-width:1.6em}
 details.ls summary{cursor:pointer;font-weight:700;padding:6px 0}
 details.ls ul{margin:6px 0 0;padding-left:18px;font-size:15px}details.ls li{margin:5px 0}
 .sec{margin:0 0 28px}
-.sec>h3{display:flex;gap:10px;align-items:baseline;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
-.sec.out>h3{border-color:var(--green);color:var(--green)}
+.sec>h2{display:flex;gap:10px;align-items:baseline;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:14px}
+.sec.out>h2{border-color:var(--green);color:var(--green)}
 .sec .note{color:var(--mut);font-size:14px;margin:-6px 0 12px}
 .fld{margin:0 0 16px}
 .fld>label,.fld>.lb{display:block;font-weight:700;font-size:15px;margin-bottom:4px}
 .fld>label.ck{display:flex;font-weight:500;font-size:15px}
 .hl{font-size:14px;color:var(--mut);margin:0 0 6px}
-.in,.cell,select.in{width:100%;border:1px solid var(--line);background:var(--in);border-radius:6px;padding:9px 10px;font-size:16px;min-height:44px}
+.in,.cell,select.in{width:100%;border:1px solid var(--fline);background:var(--in);border-radius:6px;padding:9px 10px;font-size:16px;min-height:44px}
+::placeholder{color:var(--mut);opacity:1}
 textarea.in{min-height:84px;resize:vertical;field-sizing:content;max-height:60vh}
 textarea.cell{min-height:44px;resize:vertical;field-sizing:content;font-size:15px;padding:7px}
 select.cell{font-size:15px}
@@ -89,6 +96,7 @@ table{border-collapse:collapse;width:100%}
 .ed th{font-size:13px;text-align:left;color:var(--mut);padding:4px;font-weight:700}
 .ed td{padding:3px;vertical-align:top}
 .btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:8px 14px;border-radius:7px;border:1px solid var(--line);background:var(--in);font-weight:600;font-size:15px}
+a.btn{text-decoration:none;color:inherit}
 .btn.p{background:var(--blue-d);color:#fff;border-color:var(--blue-d)}
 .btn.a{background:var(--amber);color:light-dark(#fff,#1d1600);border-color:var(--amber)}
 .btn.s{min-height:36px;padding:5px 10px;font-size:14px}
@@ -97,7 +105,7 @@ table{border-collapse:collapse;width:100%}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .fb{font-size:14px;color:var(--green);margin:6px 0 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .ck{display:flex;gap:8px;align-items:flex-start;font-size:15px;padding:5px 0;min-height:32px}
-.ck input{width:18px;height:18px;margin-top:2px;accent-color:var(--blue-d);flex:none}
+.ck input{width:18px;height:18px;margin-top:2px;accent-color:var(--blue);flex:none}
 .cg{columns:2 240px;column-gap:20px}.cg .gh{font-weight:700;margin:8px 0 2px;break-after:avoid;font-size:14px;color:var(--blue)}
 .img img{max-width:100%;max-height:360px;border:1px solid var(--line);border-radius:6px;display:block;margin-bottom:8px;background:#fff}
 .agenda{list-style:none;padding:0;margin:10px 0 12px;display:flex;flex-direction:column;gap:3px;font-size:14px;line-height:1.3}
@@ -110,14 +118,14 @@ table{border-collapse:collapse;width:100%}
 .coa{border:1px solid var(--line);border-radius:10px;margin:0 0 14px;background:var(--card)}
 .coa>summary{padding:12px 14px;font-family:"Barlow Condensed",Arial,sans-serif;font-size:21px;font-weight:700;cursor:pointer;display:flex;gap:10px;align-items:center}
 .coa .cb{padding:4px 14px 14px}
-.coa h4{margin:14px 0 8px;color:var(--blue)}
+.coa h3{margin:14px 0 8px;color:var(--blue)}
 .tag{font-family:Barlow,Arial,sans-serif;font-size:12px;font-weight:700;padding:2px 7px;border-radius:10px;background:var(--blue-l);color:var(--blue);white-space:nowrap}
 .tag.c{background:var(--green-l);color:var(--green)}
 .mx td,.mx th{border:1px solid var(--line);padding:6px;text-align:center;font-size:15px}
 .mx th:first-child,.mx td:first-child{text-align:left}
-.mx input{width:64px;text-align:center;min-height:40px;border:1px solid var(--line);border-radius:5px;background:var(--in)}
+.mx input{width:64px;text-align:center;min-height:40px;border:1px solid var(--fline);border-radius:5px;background:var(--in)}
 .mx .tot td{font-weight:700;background:var(--blue-l)}
-.mx .best{color:var(--ok)}
+.mx .best{color:light-dark(#1b5e20,var(--ok))}
 .ov{display:grid;gap:24px;grid-template-columns:minmax(0,1fr);margin-top:22px}
 @media(min-width:900px){.ov{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}}
 .dk td,.dk th{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:15px}
@@ -126,13 +134,14 @@ table{border-collapse:collapse;width:100%}
 .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .refg{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));margin-top:18px}
 .refg ul,.refg ol{margin:6px 0 0;padding-left:20px;font-size:15px}.refg li{margin:3px 0}
-.refg h3{font-size:20px;color:var(--blue)}
+.refg h2{font-size:20px;color:var(--blue)}
 .tasks{columns:3 170px;font-size:15px;margin:8px 0 0;padding-left:18px}
+.skip{position:absolute;left:-999px;top:8px}.skip:focus{left:8px;z-index:40;background:#fff;color:var(--blue-d);padding:8px 12px;border-radius:6px;font-weight:700}
 .foot{border-top:1px solid var(--line);color:var(--mut);font-size:13px;padding:16px max(3vw,14px)}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:15px;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.on{opacity:1}
 .ic{border:2px solid var(--blue);background:var(--bg)}
-.ic>h3{color:var(--blue)}
+.ic>h2{color:var(--blue)}
 .drop{border:2px dashed var(--blue);border-radius:10px;padding:18px 14px;text-align:center;background:var(--blue-l);margin:12px 0;display:flex;flex-direction:column;align-items:center;gap:8px}
 .drop.on{background:var(--amber-l);border-color:var(--amber)}
 .drop .btn{background:var(--blue-d);color:#fff;border-color:var(--blue-d)}
@@ -195,7 +204,7 @@ body.dbv main{max-width:1480px}
 .deck[hidden]{display:none}
 .dbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 12px;background:var(--blue-d);color:#fff}
 .dbar .btn{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
-.dbar .btn.a{background:var(--amber);border-color:var(--amber);color:#1d1600}
+.dbar .btn.a{background:var(--amber);border-color:var(--amber);color:light-dark(#fff,#1d1600)}
 .dbar .dt{font-weight:700;flex:1 1 200px}
 .slides{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:0}
 .sw{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;padding:14px}
@@ -223,24 +232,29 @@ body.dbv main{max-width:1480px}
 .slide .ag li{break-inside:avoid;margin:0 0 .5cqw;display:flex;gap:.7cqw}
 .slide .ag i{flex:none;width:1.1cqw;height:1.1cqw;border-radius:50%;margin-top:.35cqw;border:.2cqw solid #777}
 .slide .ag i.f{background:#2e7d32;border-color:#2e7d32}.slide .ag i.p{background:#f0c24f;border-color:#b08300}
+.slide{color-scheme:light}
+@media(max-width:600px) and (orientation:portrait){.sw{align-items:stretch;padding:8px}.slide{width:100%;aspect-ratio:auto;height:100%}.slide .sb{font-size:15px;padding:12px}.slide .sb.two{grid-template-columns:minmax(0,1fr)}.slide .mk{font-size:12px}.slide .sf{font-size:11px}.slide table{font-size:13px}.slide h3{font-size:19px}.slide .kick{font-size:11px}.slide .sub{font-size:13px}.slide .band{padding:10px 12px}.slide.ttl h3{font-size:30px}.slide.ttl .sub{font-size:17px}.slide.ttl .meta{font-size:15px}.slide .ag{columns:1}.slide .ag li{margin-bottom:6px}.slide .ag i{width:10px;height:10px;margin-top:4px}.slide .pic img{max-height:50vh}.dbar .ck{flex-basis:100%}.dbar .btn[data-act=html],.dbar .btn[data-act=fs]{display:none}}
+@media(max-height:500px){.dnav{display:none}.slide{width:min(100%,calc((100dvh - 60px)*16/9))}}
 .dnav{display:flex;justify-content:center;gap:10px;align-items:center;padding:8px;color:var(--ink)}
 .dlg{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:16px}
 .dlg[hidden]{display:none}
 .dlg .card{max-width:760px;width:100%;max-height:90dvh;overflow:auto;background:var(--bg)}
 .dlg textarea{width:100%;min-height:240px;font:13px/1.4 ui-monospace,Consolas,monospace}
 @media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:7.5em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7em;margin-inline-start:-7.5em;white-space:normal;font-size:13px;color:var(--mut);font-weight:700}.stack td:empty{display:none}.col{min-height:160px}}
+@media(pointer:coarse){.btn.s,.dbar .btn{min-height:44px}.ck{min-height:44px;align-items:center}.ss label{min-height:44px}details.ls summary,.coa>summary{min-height:44px;display:flex;align-items:center;gap:8px}.nav a{min-height:44px}.mx input,.rv select{min-height:44px}.dc>header a{padding:12px 8px}input[type=file]{min-height:44px;padding:8px 0}input[type=file]::file-selector-button{min-height:40px;padding:8px 12px}}
 @media(prefers-reduced-motion:no-preference){.bar i{transition:width .35s ease}}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
 </head>
 <body>
+<a class="skip" href="#view" data-act="skip">Skip to content</a>
 <header class="top">
   <div class="brand">MDMP Restitution Tool<small>QRG v25.2 · CALL 23-07</small></div>
   <nav class="nav" id="nav" aria-label="Sections"></nav>
   <div class="sav" id="sav" role="status">Loading…</div>
 </header>
 <section class="strip" id="strip" aria-label="The seven steps of the MDMP"></section>
-<main id="view"></main>
+<main id="view" tabindex="-1"></main>
 <footer class="foot">Sources: CGSOC DTAC DOCMAT, <i>The Military Decision-Making Process (MDMP) Quick Reference Guide</i>, v25.2, 27 Aug 25 (FM 5-0, Nov 24, chap. 5 and app. D) · Center for Army Lessons Learned, Handbook 23-07, <i>Military Decision-Making Process: Organizing and Conducting Planning</i>, Nov 23. Briefing agendas follow the QRG order; items marked CALL come from the handbook. Training aid — not an official product.</footer>
 <div class="deck" id="deck" hidden role="dialog" aria-modal="true" aria-label="Briefing">
   <div class="dbar">
@@ -252,8 +266,8 @@ body.dbv main{max-width:1480px}
     <button class="btn s" data-act="fs">Full screen</button>
     <button class="btn s" data-act="close" aria-label="Close briefing">Close ✕</button>
   </div>
-  <div class="slides" id="slides" tabindex="0"></div>
-  <div class="dnav"><button class="btn s" data-act="prev">◀ Previous</button><span id="dkn" class="num"></span><button class="btn s" data-act="next">Next ▶</button></div>
+  <div class="slides" id="slides" tabindex="0" aria-roledescription="slides" aria-label="Slides"></div>
+  <div class="dnav"><button class="btn s" data-act="prev">◀ Previous</button><span id="dkn" class="num" aria-live="polite"></span><button class="btn s" data-act="next">Next ▶</button></div>
 </div>
 <div class="dlg" id="dlg" hidden><div class="card" id="dlgc"></div></div>
 <div class="toast" id="toast" role="status"></div>
@@ -269,7 +283,7 @@ const STEPS=[
 {n:1,t:'Receipt of Mission',p:'Establish conditions for successful planning: alert the staff, form the planning team, assess time available, decide on a planning approach.',
  sub:[['Alert the staff and other key participants'],['Gather the tools'],['Update running estimates'],['Conduct initial assessment'],["Issue commander's initial guidance"],['Issue the initial warning order','o','w1']],
  out:["Commander's initial planning guidance",'Initial allocation of time','Warning order #1'],decks:['w1']},
-{n:2,t:'Mission Analysis',p:"Better understand the situation and problem; identify what the command must accomplish, when, where and why. Ends with the commander's initial intent and planning guidance.",
+{n:2,t:'Mission Analysis',p:"Better understand the situation and problem; identify what the command must accomplish, when, where and why. Based on this understanding, the commander issues the initial commander's intent and planning guidance.",
  sub:[["Analyze higher HQ's plan or order"],['Perform the initial IPOE'],['Determine specified, implied, and essential tasks'],['Review available assets and identify resource shortfalls'],['Determine constraints'],['Identify critical facts and develop assumptions'],['Begin risk management'],['Develop initial CCIRs and EEFIs'],['Develop the initial information collection plan'],['Update operational and planning timelines'],['Develop a proposed problem statement'],['Develop a proposed mission statement'],['Develop COA evaluation criteria'],['Present the mission analysis briefing','b','ma'],["Issue initial commander's intent and revised commander's planning guidance"],['Issue WARNORD #2','o','w2']],
  out:['Approved problem statement and mission statement',"Initial commander's intent","Commander's planning guidance",'Current IPOE products','Initial information collection plan','Initial CCIRs and EEFIs','Specified, implied, and essential tasks','Facts, assumptions, and constraints','Updated timeline','Resource shortfalls identified','COA evaluation criteria','Warning order #2'],decks:['ma','w2']},
 {n:3,t:'COA Development',p:"Generate options for analysis and comparison that satisfy the commander's intent and planning guidance.",
@@ -288,11 +302,12 @@ const STEPS=[
  sub:[['Produce and disseminate orders','o','op'],['Conduct an OPORD briefing','b','op'],['Transition from planning to preparation']],
  out:['Base plan or order (paragraphs 1–5)','Annexes as required','Plans and orders reconciliation and crosswalk','Order approved and disseminated; confirmation briefs'],decks:['op']}];
 
-const TASKS=['Attack by fire','Block','Breach','Bypass','Canalize','Clear','Contain','Control','Counterreconnaissance','Destroy','Disengage','Disrupt','Exfiltrate','Fix','Follow and assume','Follow and support','Interdict','Isolate','Neutralize','Occupy','Reduce','Retain','Secure','Seize','Support by fire','Suppress','Turn','Ambush','Counterattack','Demonstration','Feint','Screen','Guard','Cover','Passage of lines (forward)','Passage of lines (rearward)','Relief in place','Delay','Retirement','Withdraw','Withdraw under pressure','Envelopment','Frontal attack','Infiltration','Penetration','Turning movement'];
+const TASKG=[['Tactical mission tasks',['Attack by fire','Block','Breach','Bypass','Canalize','Clear','Contain','Control','Counterreconnaissance','Destroy','Disengage','Disrupt','Exfiltrate','Fix','Follow and assume','Follow and support','Interdict','Isolate','Neutralize','Occupy','Reduce','Retain','Secure','Seize','Support by fire','Suppress','Turn']],['Variations of the attack',['Ambush','Counterattack']],['Tactical enabling operations (tactical deception)',['Demonstration','Feint']],['Tactical enabling tasks (security operations)',['Screen','Guard','Cover']],['Tactical enabling tasks (passage of lines and relief in place)',['Passage of lines (forward)','Passage of lines (rearward)','Relief in place']],['Retrograde tasks',['Delay','Retirement','Withdraw','Withdraw under pressure']],['Forms of maneuver',['Envelopment','Frontal attack','Infiltration','Penetration','Turning movement']]];
+const TASKS=TASKG.flatMap(g=>g[1]);
 const PURP=['Allow','Cause','Create','Deceive','Deny','Divert','Draw','Enable','Influence','Open','Prevent','Protect','Support','Surprise'];
 const WFF=['Intelligence','Movement and maneuver','Fires','Protection','Sustainment','Command and control','Other'];
 const IPOE=[['1. Define the operational environment',['Limits of the commander’s AO identified (generally by higher HQ)','Limits of the area of interest identified (S2/G2 recommends; commander and higher HQ approve)','Significant characteristics of the AO and AOI identified (environmental model)','Information gaps identified; assumptions developed to fill them','RFIs and requests for information collection submitted']],
-['2. Describe environmental effects on operations',['Threat overlay','Threat description table','Modified combined obstacle overlay (MCOO)','Terrain effects matrix','Operational climatology / weather forecast analysis chart','Light and illumination data table','Weather effects matrix','Civil considerations data file','Civil considerations overlays','Civil considerations assessment']],
+['2. Describe environmental effects on operations',['Threat overlay','Threat description table','Modified combined obstacle overlay (MCOO)','Terrain effects matrix','Operational climatology / weather forecast analysis chart','Light and illumination data table','Weather effects matrix','Civil considerations data file','Civil considerations overlays','Civil considerations assessment','General intelligence knowledge (consider PMESII-PT)']],
 ['3. Evaluate the threat',['Threat data files','Threat template','High-value target list','Threat capability statement']],
 ['4. Determine threat COAs',['Situation template','Threat COA statement','Event template','Event matrix']]];
 const ANNEX=[['A','Task Organization'],['B','Intelligence'],['C','Operations'],['D','Fires'],['E','Protection'],['F','Sustainment'],['G','Engineer'],['H','Signal'],['I','AMD'],['J','Public Affairs'],['K','Civil Affairs Ops'],['L','Info Collection'],['M','Assessment'],['N','Space Operations'],['O','Host-Nation Support'],['P','Knowledge Mgt'],['Q','Reports'],['R','Special Technical Operations'],['S','Inspector General'],['T','Interagency Coordination'],['U','Operational Contract Support'],['V','Distribution']];
@@ -332,7 +347,7 @@ F('hq1_intent',"Commander's intent — HQ one echelon higher",'txt');
 F('hq1_conops','Concept of operations — HQ one echelon higher','txt');
 F('adjacent','Adjacent, supporting and supported units; unified action partners','txt');
 F('ao','Assigned area (AO) and area of interest','txt');
-F('ipoe_chk','IPOE products available','check',{g:IPOE,keys:IPOE.flatMap(g=>g[1]).map((x,i)=>'i'+(i+1))});
+F('ipoe_chk','IPOE products available','check',{g:IPOE,keys:(()=>{let n=0;return IPOE.flatMap(g=>g[1]).map(x=>x.startsWith('General intelligence')?'gik':'i'+(++n))})()});
 F('hhq_enemy','Enemy situation — higher order (para 1.c, annex B)','txt');
 F('hhq_env','Terrain, weather and civil considerations — higher order','txt');
 F('hhq_ccir','Higher HQ CCIRs and EEFIs','list');
@@ -399,17 +414,17 @@ F('fpg_risk','Risk the commander is willing to accept','txt',{h:"Risk that might
 F('w3_tasks','Principal tasks assigned to subordinate units','txt');
 F('w3_reh','Preparation and rehearsal instructions not included in SOPs','txt',{fb:['fpg_reh']});
 // step 7
-F('op_aoi','a. Area of interest','txt',{fb:['ao']});F('op_area','b. Assigned area','txt',{fb:['ao']});
-F('op_enemy','c. Enemy forces','txt',{fb:['ipoe_cur','ipoe_sum','hhq_enemy']});F('op_friendly','d. Friendly forces','txt',{fb:['hq1_mission']});
-F('op_ia','e. IA, IG and NGOs','txt');F('op_civil','f. Civil considerations','txt');F('op_assump','g. Assumptions','txt',{fb:['assumptions']});
+F('op_aoi','Area of interest','txt',{fb:['ao']});F('op_area','Assigned area','txt',{fb:['ao']});
+F('op_enemy','Enemy forces','txt',{fb:['ipoe_cur','ipoe_sum','hhq_enemy']});F('op_friendly','Friendly forces','txt',{fb:['hq1_mission']});
+F('op_ia','IA, IG and NGOs','txt');F('op_civil','Civil considerations','txt');F('op_assump','Assumptions','txt',{fb:['assumptions']});
 F('op_mission','Mission','txt',{fb:['mission']});
-F('op_intent',"a. Commander's intent",'txt',{fb:['fpg_intent','ci']});
-F('op_conops','b. Concept of operations','txt',{fb:['@acoa:conops']});
+F('op_intent',"Commander's intent",'txt',{fb:['fpg_intent','ci']});
+F('op_conops','Concept of operations','txt',{fb:['@acoa:conops']});
 F('op_img','Operation overlay / graphics','img',{fb:['@acoa:sketch']});
-F('op_tasks','c. Tasks to subordinate units','txt',{fb:['w3_tasks']});
-F('op_coord','d. Coordinating instructions','txt');
-F('op_log','a. Logistics','txt');F('op_pers','b. Personnel','txt');F('op_hss','c. Health service support','txt');F('op_fin','d. Financial management','txt');
-F('op_cmd','a. Command','txt');F('op_sig','b. Signal','txt');
+F('op_tasks','Tasks to subordinate units','txt',{fb:['w3_tasks']});
+F('op_coord','Coordinating instructions','txt');
+F('op_log','Logistics','txt');F('op_pers','Personnel','txt');F('op_hss','Health service support','txt');F('op_fin','Financial management','txt');
+F('op_cmd','Command','txt');F('op_sig','Signal','txt');
 F('annexes','Annexes','annex');
 F('s7_qc','Before and after approval','check',{g:[['',QC.map(x=>x[1])]],keys:QC.map(x=>x[0])});
 F('s7_trans','Plans-to-operations transition notes','txt');
@@ -540,50 +555,94 @@ const COAG={3:[['Statement, sketch and task organization',['statement','sketch',
 
 /* CALL 23-07 lessons and best practices, paraphrased */
 const LESS={
-1:['Determine time available at once: when higher expects the operation to start and end, and the earliest time of movement.','Start mission analysis activities, IPOE first, before receipt of mission is complete.','Give subordinates initial guidance as early as possible so movement and planning start; keep the initial timeline adjustable.','The XO owns a comprehensive, achievable timeline (HOPES-W) visible to the whole formation, not on a whiteboard few people see.','The initial WARNORD carries as much relevant information as the staff knows.'],
+1:['Determine time available at once: when higher expects the operation to start and end, and the earliest time of movement.','Start mission analysis activities before receipt of mission is complete; begin IPOE as early as possible.','Give subordinates initial guidance as early as possible so movement and planning start; keep the initial timeline adjustable.','The XO owns a comprehensive, achievable timeline (HOPES-W) visible to the whole formation, not on a whiteboard few people see.','The initial WARNORD carries as much relevant information as the staff knows.'],
 2:['A good MA answers: where and when am I fighting; what enemy; what am I told to do; what am I given; what is higher doing for me; what are adjacent units doing; what must I do or not do.','The most important output is the commander’s COA guidance.','Use a nesting diagram to confirm task and purpose nest with higher.','Reverse IPOE: the whole staff feeds the S-2 on terrain, population, enemy by WfF, neutral and partner forces.','Implied tasks often decide success or failure.','Approved constraints are a key output; staffs confuse constraints and limitations.','Plan presumptively with assumptions, then confirm or deny each one.','Communicate time shifts quickly: subordinates need parallel planning time.','Send WARNORD #2 as fighting products, not as a long document.','Brief from the MA products themselves when the commander has followed the work.'],
 3:['Go through every COA development sub-step, even with a directed COA.','With a single directed COA, build the fighting products (graphics, SITEMP, SYNCMAT, fires and IC matrices, DSM) to an 80–90 % solution before the war game.','Assess relative combat power honestly; the XO or S-3 acts as honest broker.','For several COAs, give each a team lead; a small group outlines what distinguishes them first.','A COA is a statement and a sketch, not a plan: center it on the scheme of maneuver and the concept of fires.','A COA brief is not an OPORD brief. Review inputs quickly (S-2: changes to enemy COAs; S-3: higher mission, intent, guidance); others brief by exception; spend most of the time on the COAs.','The COA team lead briefs the statement; a second person points to the units and tasks on the sketch.'],
-4:['Plan enough time for a thorough war game; avoid incidental war-gaming during MA or COA development.','Enter the war game with a complete COA; otherwise it turns into a synchronization drill to build products.','Validate: right task and purpose, enough strength, anything to resynchronize, graphics for enemy options, right decisions in the right place.','Tie each turn to a date-time group; give the recorder written notes; use a facilitator; let the LNO or unit planner brief that unit.','Do not pre-fill the SYNCMAT beyond the initial set and the action.','Spend one-third of the time on the base plan and two-thirds on branches and sequels.','Common failures: incomplete COAs, wasted time, OPFOR changing the enemy COA, OPFOR not allowed to fight back, focus only on actions on the objective.','The war-game brief usually goes to the COS, XO or deputy, not the commander.'],
+4:['Plan enough time for a thorough war game; avoid incidental war-gaming during MA or COA development.','Enter the war game with a complete COA; otherwise it turns into a synchronization drill to build products.','Validate: right task and purpose, enough strength, anything to resynchronize, graphics for enemy options, right decisions in the right place.','Tie each turn to a date-time group; give the recorder written notes; use a facilitator; let the LNO or unit planner brief that unit.','Do not pre-fill the SYNCMAT beyond the initial set and the action.','Spend one-third of the time on the base plan and two-thirds on branches and sequels.','Common failures: incomplete COAs, wasted time, OPFOR changing the enemy COA, OPFOR not allowed to fight back, focus only on actions on the objective.','Time permitting, the staff gives a war-game brief to confirm everyone understands the results; it is typically not given to the commander.'],
 5:['With a directed COA, comparison criteria are unnecessary, but compare the options inside the COA.','The decision matrix starts the dialogue; it does not make the decision. Compare criterion by criterion rather than only totals.','The selected COA generally poses the least risk, best postures the force for future operations, gives subordinates the most latitude, offers the most flexibility, and provides the most secure environment for civilians.','If the staff cannot agree, the XO decides which COA to recommend.'],
 6:['If the commander rejects all COAs, restart COA development; if a COA is modified, develop and analyze it, then return with a recommendation.','Final planning guidance: refined intent, new CCIRs, WfF priorities, orders preparation, rehearsal and preparation guidance, resource priorities, and accepted risk.','WARNORD #3 confirms guidance given in person and expands on the details.'],
 7:['Keep the OPORD short; subordinates must not need several documents to understand it. Build it around the fighting products.','Reconcile internally and crosswalk with higher and adjacent units before approval.','Commanders review attachments before signing the base order.','Do not paste the OPORD into slides: brief maps, overlays, graphics, unit interactions and critical events.','The audience is the subordinate executors; set the room around them.','Run confirmation briefs immediately after the order.']};
 
 /* ---------- STATE AND STORAGE ---------- */
-let V={};const ST={db:null,dl:null,sm:null,uid:null,ws:'personal',col:null,unsub:null,timers:{},busy:{},again:{},first:true,mode:'local'};
+let V={};const ST={db:null,dl:null,sm:null,uid:null,ws:'personal',col:null,unsub:null,timers:{},busy:{},again:{},tries:{},failed:new Set(),dirty:new Set(),first:true,mode:'local'};
 try{ST.ws=localStorage.getItem('mdmp:ws')||'personal'}catch(e){}
 const lkey=()=>'mdmp:v:'+ST.ws;
-function loadLocal(){try{const s=localStorage.getItem(lkey());V=s?JSON.parse(s):{}}catch(e){V={}}}
-let ltimer;function saveLocal(){clearTimeout(ltimer);ltimer=setTimeout(()=>{try{localStorage.setItem(lkey(),JSON.stringify(V))}catch(e){}},500)}
+/* every value read from storage, another viewer or an import is checked against the field definitions */
+const okId=s=>typeof s==='string'&&/^[A-Za-z0-9_-]{1,40}$/.test(s);
+const isImg=v=>typeof v==='string'&&/^data:image\/(png|jpeg|gif|webp);base64,[A-Za-z0-9+\/=]+$/.test(v);
+const isObj=o=>!!o&&typeof o==='object'&&!Array.isArray(o);
+function cleanRows(a,cols){if(!Array.isArray(a))return undefined;return a.filter(isObj).map(r=>{const o={_id:okId(r._id)?r._id:uid()};for(const c of cols)if(r[c]!=null&&typeof r[c]!=='object')o[c]=String(r[c]);return o})}
+function cleanVal(k,v){if(v===undefined||v===null)return undefined;
+ if(k==='coas')return Array.isArray(v)?v.filter(c=>isObj(c)&&okId(c.id)).map(c=>({id:c.id,name:String(c.name??'COA').slice(0,120)})):undefined;
+ if(k==='intake'){if(!isObj(v))return undefined;return {t:+v.t||0,unit:String(v.unit??''),applied:+v.applied||0,appliedN:+v.appliedN||0,propsLocal:!!v.propsLocal,
+   docs:Array.isArray(v.docs)?v.docs.filter(isObj).map(d=>({name:String(d.name??''),role:String(d.role??'Other'),pages:+d.pages||0,chars:+d.chars||0,status:String(d.status??'')})):[],
+   props:Array.isArray(v.props)?v.props.filter(p=>isObj(p)&&typeof p.id==='string'&&FD[p.id]).map(p=>{const d=FD[p.id];return {id:p.id,val:d.t==='table'?(cleanRows(p.val,d.c.map(c=>c[0]))||[]):String(p.val??''),act:['fill','append','skip'].includes(p.act)?p.act:'skip'}}):[]}}
+ let d;if(k.startsWith('coa.')){const p=k.split('.');if(p.length!==3||!okId(p[1])||!CF[p[2]])return undefined;d={t:CF[p[2]][1]}}else{d=FD[k];if(!d)return undefined}
+ switch(d.t){
+  case 'img':return isImg(v)?v:undefined;
+  case 'table':return cleanRows(v,d.c.map(c=>c[0]));
+  case 'check':{if(!isObj(v))return undefined;const o={};for(const [x,y] of Object.entries(v))if(typeof y==='boolean')o[x]=y;return o}
+  case 'annex':{if(!isObj(v))return undefined;const o={};for(const [x,y] of Object.entries(v))if(/^[A-V]$/.test(x)&&typeof y==='string')o[x]=y;return o}
+  case 'matrix':{if(!isObj(v))return undefined;const o={};for(const [r,row] of Object.entries(v))if(okId(r)&&isObj(row)){o[r]={};for(const [c,x] of Object.entries(row))if(okId(c)&&(typeof x==='string'||typeof x==='number'))o[r][c]=String(x)}return o}
+  case 'bool':return typeof v==='boolean'?v:undefined;
+  case 'coasel':return okId(v)?v:undefined;
+  case 'coas':return undefined;
+  default:return typeof v==='string'||typeof v==='number'?String(v):undefined}}
+function cleanAll(o){const out={};if(!isObj(o))return out;for(const [k,v] of Object.entries(o)){const c=cleanVal(k,v);if(c!==undefined)out[k]=c}return out}
+let ltimer;
+function loadLocal(){try{const x=localStorage.getItem(lkey());V=x?cleanAll(JSON.parse(x)):{}}catch(e){V={}}
+ try{ST.dirty=new Set((JSON.parse(localStorage.getItem('mdmp:d:'+ST.ws)||'[]')||[]).filter(x=>typeof x==='string'))}catch(e){ST.dirty=new Set()}}
+function saveLocalNow(){clearTimeout(ltimer);ltimer=null;try{localStorage.setItem(lkey(),JSON.stringify(V));localStorage.setItem('mdmp:d:'+ST.ws,JSON.stringify([...ST.dirty]))}catch(e){}}
+function saveLocal(){if(ltimer)return;ltimer=setTimeout(saveLocalNow,400)}
 function status(t,w){const s=$('#sav');s.textContent=t;s.classList.toggle('warn',!!w);const l=$('.live span');if(l)l.textContent=t}
+function savedStatus(){if(Object.keys(ST.timers).length||ST.failed.size)return;status('Saved · '+wsLabel())}
 function wsLabel(){return ST.ws==='personal'?'Personal workspace':'Team: '+ST.ws.slice(5)}
 function colPath(){return ST.ws==='personal'?'data/users/'+ST.uid:'teams/'+ST.ws.slice(5)+'/f'}
-function setV(id,val){V[id]=val;saveLocal();queue(id);meta()}
-function queue(id){if(!ST.col)return;clearTimeout(ST.timers[id]);status('Saving…');ST.timers[id]=setTimeout(()=>{delete ST.timers[id];flush(id)},700)}
-async function flush(id){
+function setV(id,val){V[id]=val;ST.dirty.add(id);saveLocal();queue(id);meta()}
+function queue(id,delay=700){if(!ST.col)return;clearTimeout(ST.timers[id]);if(!ST.failed.size)status('Saving…');ST.timers[id]=setTimeout(()=>{delete ST.timers[id];flush(id)},delay)}
+const tooBig=v=>{try{return new Blob([JSON.stringify(v)]).size>240000}catch(e){return true}};
+async function flush(id,col=ST.col){if(!col)return;
  if(ST.busy[id]){ST.again[id]=1;return}ST.busy[id]=1;
- try{const v=V[id],ref=ST.col.doc(id);if(v===undefined||v===null||v==='')await ref.delete();else await ref.set({val:v,t:Date.now()});
-  if(!Object.keys(ST.timers).length)status('Saved · '+wsLabel())}
- catch(e){const c=e&&e.code;if(c==='quota_exceeded')status('Storage full — export a backup',1);else if(c==='invalid_argument')status('Not saved (item too large or read-only)',1);else if(c==='unavailable'&&!ST.again[id]){ST.again[id]=1}else status('Not saved — kept in this browser',1)}
- finally{ST.busy[id]=0;if(ST.again[id]){ST.again[id]=0;setTimeout(()=>flush(id),600)}}}
+ const v=V[id],snap=JSON.stringify(v??null);
+ try{const ref=col.doc(id);
+  if(v===undefined||v===null||v==='')await ref.delete();
+  else{let body=v;if(id==='intake'&&tooBig(v)){body={...v,props:[],propsLocal:true};toast('Proposals too large to save online — kept in this browser; apply them now')}await ref.set({val:body,t:Date.now()})}
+  ST.tries[id]=0;ST.failed.delete(id);if(col===ST.col)for(const k of [...ST.failed])if(!ST.timers[k]&&!ST.busy[k])queue(k,200);
+  if(col===ST.col){if(JSON.stringify(V[id]??null)===snap){ST.dirty.delete(id);saveLocal()}savedStatus()}}
+ catch(e){const c=(e&&e.code)||'error';
+  if(col===ST.col){ST.failed.add(id);
+   if(c==='quota_exceeded')status('Storage full — export a backup',1);
+   else if(c==='invalid_argument')status('Not saved (item too large or read-only)',1);
+   else{const n=ST.tries[id]=(ST.tries[id]||0)+1;status('Offline — will retry',1);queue(id,Math.min(10000,600*2**n))}}}
+ finally{ST.busy[id]=0;if(ST.again[id]){ST.again[id]=0;if(col===ST.col)queue(id,300)}}}
+function keepIntake(nv,old){const n=nv.intake;if(n&&n.propsLocal&&old&&Array.isArray(old.props)&&old.props.length&&old.t===n.t)nv.intake={...n,props:old.props}}
 function connect(){
  if(ST.unsub){try{ST.unsub()}catch(e){}ST.unsub=null}
- loadLocal();render();
+ loadLocal();ST.failed=new Set();ST.tries={};render();
  if(!ST.db||(ST.ws==='personal'&&!ST.uid)){status('Saved in this browser only',1);return}
  try{ST.col=ST.db.collection(colPath())}catch(e){ST.col=null;status('Saved in this browser only',1);return}
- ST.first=true;status('Loading '+wsLabel()+'…');
- const lt=setTimeout(()=>status('Saved data cannot be reached yet — working locally',1),10000);
- ST.unsub=ST.col.onSnapshot(snap=>{
+ const col=ST.col,sk='mdmp:s:'+ST.ws;ST.first=true;status('Loading '+wsLabel()+'…');
+ const lt=setTimeout(()=>{if(col===ST.col)status('Saved data cannot be reached yet — working locally',1)},10000);
+ ST.unsub=col.onSnapshot(snap=>{
+  if(col!==ST.col)return;
   if(snap.metadata.fromCache&&ST.first)return;clearTimeout(lt);
   const ch=[];
-  if(ST.first){ST.first=false;
-   if(snap.empty&&Object.keys(V).length){for(const k of Object.keys(V))queue(k)}
-   else{const nv={};for(const d of snap.docs){const b=d.data();if(b)nv[d.id]=b.val}
-    for(const k of Object.keys(ST.timers))if(k in V)nv[k]=V[k];V=nv;saveLocal();ch.push('*')}}
-  else for(const c of snap.docChanges()){const id=c.doc.id;if(ST.timers[id]||ST.busy[id])continue;
-   if(c.type==='removed')delete V[id];else{const b=c.doc.data();V[id]=b?b.val:undefined}ch.push(id)}
-  if(!Object.keys(ST.timers).length)status('Saved · '+wsLabel());
+  if(ST.first){ST.first=false;let synced=false;try{synced=localStorage.getItem(sk)==='1'}catch(e){}
+   if(snap.empty&&Object.keys(V).length){
+    if(!synced){for(const k of Object.keys(V)){ST.dirty.add(k);queue(k)}}
+    else{const keep={};for(const k of ST.dirty)if(k in V)keep[k]=V[k];V=keep;for(const k of Object.keys(V))queue(k);saveLocal();ch.push('*')}}
+   else{const nv={};for(const d of snap.docs){const b=d.data();if(b){const c=cleanVal(d.id,b.val);if(c!==undefined)nv[d.id]=c}}
+    keepIntake(nv,V.intake);
+    for(const k of ST.dirty)if(k in V){nv[k]=V[k];queue(k)}
+    for(const k of Object.keys(ST.timers))if(k in V)nv[k]=V[k];
+    V=nv;saveLocal();ch.push('*')}
+   try{localStorage.setItem(sk,'1')}catch(e){}}
+  else for(const c of snap.docChanges()){const id=c.doc.id;if(ST.timers[id]||ST.busy[id]||ST.dirty.has(id))continue;const old=V[id];
+   if(c.type==='removed')delete V[id];else{const b=c.doc.data();const cv=b?cleanVal(id,b.val):undefined;if(cv===undefined)delete V[id];else V[id]=cv}
+   if(id==='intake'){const t={intake:V.intake};keepIntake(t,old);if(t.intake)V.intake=t.intake}ch.push(id)}
+  savedStatus();
   if(ch.length)remote(ch)},
- e=>{clearTimeout(lt);status(e&&e.code==='revoked'?'Read-only now':'Saved data unavailable — working locally',1)})}
+ e=>{clearTimeout(lt);if(col===ST.col)status(e&&e.code==='revoked'?'Read-only now':'Saved data unavailable — working locally',1)})}
 let pend=false;
 function remote(ids){saveLocal();const a=document.activeElement;
  if(a&&a.closest&&a.closest('#view')&&(a.matches('input,textarea,select'))){pend=true;meta();return}
@@ -599,9 +658,11 @@ function filled(v,t){if(v==null)return false;
  if(t==='table')return Array.isArray(v)&&v.some(r=>Object.keys(r).some(k=>k!=='_id'&&String(r[k]??'').trim()));
  if(t==='check'||t==='annex'||t==='matrix')return v&&typeof v==='object'&&Object.values(v).some(x=>x&&(typeof x!=='object'||Object.keys(x).length));
  if(t==='bool')return typeof v==='boolean';
+ if(t==='img')return isImg(v);
+ if(t==='coasel')return coas().some(c=>c.id===v);
  if(Array.isArray(v))return v.length>0;return String(v).trim()!==''}
 const has=id=>{if(VIRT[id])return VIRT[id].r.some(has);if(id.startsWith('@'))return !!special(id);return filled(V[id],def(id).t)};
-const acoa=()=>{const id=V.approved_coa||V.rec_coa;return coas().find(c=>c.id===id)};
+const acoa=()=>coas().find(c=>c.id===V.approved_coa)||coas().find(c=>c.id===V.rec_coa);
 function special(ref){
  if(ref.startsWith('@acoa:')){const c=acoa(),k=ref.slice(6);if(!c)return null;const id='coa.'+c.id+'.'+k;return filled(V[id],CF[k][1])?{id,c}:null}
  if(ref==='@matrix')return mxOK()?1:null;return null}
@@ -615,7 +676,7 @@ function val2blk(id,h,from){const d=def(id),v=V[id];
  switch(d.t){
  case 'list':return {h,ty:'list',d:lines(v),from};
  case 'table':{const cols=d.c||[];const rows=(v||[]).filter(r=>cols.some(c=>String(r[c[0]]??'').trim()));return {h,ty:'table',d:{cols:cols.map(c=>c[1]),rows:rows.map(r=>cols.map(c=>String(r[c[0]]??'')))},from}}
- case 'img':return {h,ty:'img',d:v,from};
+ case 'img':return isImg(v)?{h,ty:'img',d:v,from}:{h,ty:'empty'};
  case 'check':{const labs=d.g?d.g.flatMap(g=>g[1]):(d.keys||[]);const keys=d.keys||labs;return {h,ty:'list',d:keys.map((k,i)=>v&&v[k]?labs[i]:null).filter(Boolean),from}}
  case 'bool':return {h,ty:'text',d:v?'Yes':'No',from};
  case 'coasel':return {h,ty:'text',d:coaName(v)||'',from};
@@ -623,8 +684,9 @@ function val2blk(id,h,from){const d=def(id),v=V[id];
  default:return {h,ty:'text',d:String(v??''),from}}}
 function blocks(ref,c,full){const opt=ref[0]==='?';if(opt)ref=ref.slice(1);
  if(VIRT[ref]){const sub=VIRT[ref].r.filter(has);if(!sub.length)return [{h:VIRT[ref].l,ty:'empty',opt,step:stepOf(ref)}];return sub.flatMap(r=>blocks(r))}
+ if((ref==='@matrix'||ref==='@mxcoa')&&V.cmp_tech&&!/^Decision matrix/.test(V.cmp_tech)&&!mxCalc())return ref==='@matrix'?[{h:'Comparison technique',ty:'text',d:V.cmp_tech}]:[];
  if(ref==='@matrix')return [mxBlock()];
- if(ref==='@mxcoa'){const m=mxCalc();if(!m||!c)return [{h:'Evaluation criteria results',ty:'empty',opt:1,step:5}];const t=m.tot[c.id];return [{h:'Evaluation criteria results',ty:'text',d:`Unweighted total ${t.u} · weighted total ${t.w}${m.best===c.id?' — lowest (preferred) total':''}`}]}
+ if(ref==='@mxcoa'){const m=mxCalc();if(!m||!c)return [{h:'Evaluation criteria results',ty:'empty',opt:1,step:5}];const t=m.tot[c.id];return [{h:'Evaluation criteria results',ty:'text',d:`Unweighted total ${t.u} · weighted total ${t.w}${m.best===c.id?' — lowest (preferred) total':''}${m.complete?'':' (matrix incomplete)'}`}]}
  if(ref.startsWith('@acoa:')){const s=special(ref);if(!s)return [{h:lbl(ref),ty:'empty',opt,step:6}];return [val2blk(s.id,CF[ref.slice(6)][0]+' — '+s.c.name)]}
  let id=ref;if(c&&CF[ref])id='coa.'+c.id+'.'+ref;
  const d=def(id);
@@ -639,77 +701,80 @@ const coaStep=k=>COAG[5][0][1].includes(k)?5:COAG[4][0][1].includes(k)&&!COAG[3]
 function parts(it){return it.parts||[{r:it.r}]}
 function itemFill(it){let t=0,f=0;
  for(const p of parts(it)){const cs=p.per?(p.per===2?retained():coas()):[null];if(p.per&&!cs.length){t++;continue}
-  for(const c of cs)for(const r of p.r){if(r[0]==='?')continue;t++;const b=blocks(r,c);if(b.some(x=>x.ty!=='empty'))f++}}
+  for(const c of cs)for(const r of p.r){if(r[0]==='?')continue;if((r==='@matrix'||r==='@mxcoa')&&V.cmp_tech&&!/^Decision matrix/.test(V.cmp_tech))continue;t++;const b=blocks(r,c);if(b.some(x=>x.ty!=='empty'))f++}}
  if(t)return f/t;
  return parts(it).some(p=>p.r.some(r=>{const x=r.replace('?','');return VIRT[x]||x[0]==='@'||!CF[x]?has(x):false}))?1:null}
 const dotc=f=>f===null?'':f>=1?' f':f>0?' p':'';
 function deckFill(did){const fs=DECKS[did].items.map(itemFill).filter(x=>x!==null);return fs.length?fs.reduce((a,b)=>a+b,0)/fs.length:0}
 
 /* decision matrix */
+const wt=r=>{const x=parseFloat(r.w);return isNaN(x)?1:x};
 function crit(){return (Array.isArray(V.criteria)?V.criteria:[]).filter(r=>String(r.ti||'').trim())}
-function mxCalc(){const cr=crit(),cs=retained();if(!cr.length||!cs.length)return null;const m=V.matrix||{};const tot={};let any=0;
- for(const c of cs){let u=0,w=0;for(const r of cr){const x=parseFloat((m[r._id]||{})[c.id]);if(!isNaN(x)){any=1;u+=x;w+=x*(parseFloat(r.w)||1)}}tot[c.id]={u:+u.toFixed(2),w:+w.toFixed(2)}}
- if(!any)return null;let best=null;for(const c of cs)if(best===null||tot[c.id].w<tot[best].w)best=c.id;return {cr,cs,m,tot,best}}
+function mxCalc(){const cr=crit(),cs=retained();if(!cr.length||!cs.length)return null;const m=V.matrix||{};const tot={};let any=0,complete=true;
+ for(const c of cs){let u=0,w=0;for(const r of cr){const x=parseFloat((m[r._id]||{})[c.id]);if(!isNaN(x)){any=1;u+=x;w+=x*wt(r)}if(isNaN(x)||x<1||x>cs.length||Math.round(x)!==x)complete=false}tot[c.id]={u:+u.toFixed(2),w:+w.toFixed(2)}}
+ if(!any)return null;let best=null;if(complete){for(const c of cs)if(best===null||tot[c.id].w<tot[best].w)best=c.id;if(cs.filter(c=>tot[c.id].w===tot[best].w).length>1)best=null}return {cr,cs,m,tot,best,complete}}
 const mxOK=()=>!!mxCalc();
 function mxBlock(){const x=mxCalc();if(!x)return {h:'Decision matrix',ty:'empty',step:5};
- const rows=x.cr.map(r=>[r.ti+(r.w&&r.w!=='1'?` (×${r.w})`:''),...x.cs.map(c=>{const v=(x.m[r._id]||{})[c.id];const w=parseFloat(r.w)||1;return v===undefined||v===''?'—':(w!==1?`${v} (${+(v*w).toFixed(2)})`:String(v))})]);
- rows.push(['Total — unweighted (weighted)',...x.cs.map(c=>`${x.tot[c.id].u} (${x.tot[c.id].w})`)]);
+ const rows=x.cr.map(r=>[r.ti+(r.w&&r.w!=='1'?` (×${r.w})`:''),...x.cs.map(c=>{const v=(x.m[r._id]||{})[c.id];const w=wt(r);return v===undefined||v===''?'—':(w!==1?`${v} (${+(v*w).toFixed(2)})`:String(v))})]);
+ rows.push(['Total — unweighted (weighted)',...x.cs.map(c=>`${x.tot[c.id].u} (${x.tot[c.id].w})${x.best===c.id?' — lowest':''}`)]);if(!x.complete)rows.push(['Matrix incomplete: each cell needs a rank from 1 to '+x.cs.length,...x.cs.map(()=>'')]);
  return {h:'Decision matrix — ranks, lower is preferred',ty:'table',d:{cols:['Criterion',...x.cs.map(c=>c.name)],rows}}}
 
 /* ---------- RENDER: chrome ---------- */
 function route(){const h=(location.hash||'#overview').slice(1);const m=/^step-([1-7])$/.exec(h);return m?{v:'step',n:+m[1]}:{v:['dashboard','reference','data'].includes(h)?h:'overview'}}
 function nav(){const r=route();const L=[['overview','Overview'],['dashboard','Dashboard'],...STEPS.map(s=>['step-'+s.n,'Step '+s.n]),['reference','Reference'],['data','Data']];
- $('#nav').innerHTML=L.map(([h,t])=>`<a href="#${h}" ${((r.v==='step'&&h==='step-'+r.n)||r.v===h)?'aria-current="page"':''}>${t}</a>`).join('')}
+ $('#nav').innerHTML=L.map(([h,t])=>`<a href="#${h}" ${((r.v==='step'&&h==='step-'+r.n)||r.v===h)?'aria-current="page"':''}${/^Step \d$/.test(t)?` aria-label="${t}"`:''}>${/^Step \d$/.test(t)?'<span class="lg">Step </span>'+t.slice(5):t}</a>`).join('')}
+function centerCur(){for(const [c,sel] of [['#nav','[aria-current=page]'],['#strip','[aria-current=step]']]){const box=$(c),el=box&&box.querySelector(sel);if(el&&box.scrollWidth>box.clientWidth)box.scrollLeft=Math.max(0,el.offsetLeft-(box.clientWidth-el.offsetWidth)/2)}}
 function subProg(n){const v=V['sub_'+n]||{};const k=STEPS[n-1].sub.length;let d=0;for(let i=1;i<=k;i++)if(v['s'+i])d++;return [d,k]}
 const pc=x=>Math.round(x*100);
 function strip(){const r=route();
  $('#strip').innerHTML=STEPS.map(s=>{const [d,k]=subProg(s.n);
-  const ch=s.decks.map(id=>`<span class="chip ${DECKS[id].k}" data-m="${id}">${esc(DECKS[id].n)}<b>${pc(deckFill(id))} %</b></span>`).join('');
+  const ch=s.decks.map(id=>`<span class="chip ${DECKS[id].k}" data-m="${esc(id)}">${esc(DECKS[id].n)}<b>${pc(deckFill(id))} %</b></span>`).join('');
   return `<a class="col" href="#step-${s.n}" ${r.v==='step'&&r.n===s.n?'aria-current="step"':''}><div class="hd"><div class="n">Step ${s.n}</div><div class="tt">${esc(s.t)}</div></div>
   <div class="bd"><div class="prog" data-sp="${s.n}">${d} / ${k} sub-steps</div><div class="bar"><i data-spb="${s.n}" style="width:${pc(d/k)}%"></i></div>${ch||'<span class="prog">Feeds the COA decision brief</span>'}</div></a>`}).join('')}
-let mt;function meta(){clearTimeout(mt);mt=setTimeout(()=>{
+let mt;function meta(){clearTimeout(mt);mt=setTimeout(()=>{try{metaInner()}catch(e){console.error(e)}},120)}
+function metaInner(){{
  for(const s of STEPS){const [d,k]=subProg(s.n);$$(`[data-sp="${s.n}"]`).forEach(a=>a.textContent=`${d} / ${k} sub-steps`);const b=$(`[data-spb="${s.n}"]`);if(b)b.style.width=pc(d/k)+'%'}
- for(const id in DECKS){const p=pc(deckFill(id));$$(`[data-m="${id}"] b`).forEach(e=>e.textContent=p+' %');$$(`[data-pc="${id}"]`).forEach(e=>e.textContent=p+' %');$$(`[data-pb="${id}"]`).forEach(e=>e.style.width=p+'%');
+ for(const id in DECKS){const p=pc(deckFill(id));$$(`[data-m="${esc(id)}"] b`).forEach(e=>e.textContent=p+' %');$$(`[data-pc="${esc(id)}"]`).forEach(e=>e.textContent=p+' %');$$(`[data-pb="${esc(id)}"]`).forEach(e=>e.style.width=p+'%');
   DECKS[id].items.forEach((it,i)=>{const f=itemFill(it);$$(`[data-it="${id}-${i}"]`).forEach(e=>e.className='dot'+dotc(f))})}
  const mx=$('#mxt');if(mx)mx.innerHTML=mxTotals();
  const cl=$('#calc');if(cl)cl.innerHTML=calcTime();
  $$('[data-fbh]').forEach(e=>{const id=e.dataset.fbh;e.hidden=has(id)||!src(id)});
-},120)}
+}}
 
 /* ---------- RENDER: widgets ---------- */
 const fid=id=>'f-'+id.replace(/[^A-Za-z0-9_-]/g,'_');
-function W(id,opt={}){const d=def(id),v=V[id],L=opt.l||d.l;
+function W(id,opt={}){const d=def(id),v=V[id],L=opt.l||d.l,I=opt.id||fid(id);
  let w='';const ph=d.ph?` placeholder="${esc(d.ph)}"`:'';
  switch(d.t){
- case 'line':w=`<input class="in" id="${fid(id)}" data-f="${id}" value="${esc(v)}"${ph}${d.dl?` list="${d.dl}"`:''}>`;break;
- case 'dt':w=`<input class="in" type="datetime-local" id="${fid(id)}" data-f="${id}" value="${esc(v)}">`;break;
- case 'txt':w=`<textarea class="in" id="${fid(id)}" data-f="${id}" rows="3"${ph}>${esc(v)}</textarea>`;break;
- case 'list':w=`<textarea class="in" id="${fid(id)}" data-f="${id}" rows="3" placeholder="One item per line">${esc(v)}</textarea>`;break;
- case 'sel':w=`<select class="in" id="${fid(id)}" data-f="${id}"><option value="">—</option>${d.o.map(o=>`<option ${v===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`;break;
- case 'coasel':w=`<select class="in" id="${fid(id)}" data-f="${id}"><option value="">—</option>${coas().map(c=>`<option value="${c.id}" ${v===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}</select>`;break;
- case 'bool':return `<div class="fld" data-w="${id}"><label class="ck"><input type="checkbox" data-f="${id}" data-b="1" ${v!==false?'checked':''}> ${esc(L)}</label></div>`;
- case 'img':w=`<div class="img">${typeof v==='string'&&v.startsWith('data:image/')?`<img src="${v}" alt="${esc(L)}"><button class="btn s x" data-act="clrimg" data-id="${id}">Remove image</button> `:''}<input type="file" accept="image/*" data-img="${id}" id="${fid(id)}" aria-label="${esc(L)}"></div>`;break;
+ case 'line':w=`<input class="in" id="${I}" data-f="${esc(id)}" value="${esc(v)}"${ph}${d.dl?` list="${d.dl}"`:''}>`;break;
+ case 'dt':w=`<input class="in" type="datetime-local" id="${I}" data-f="${esc(id)}" value="${esc(v)}">`;break;
+ case 'txt':w=`<textarea class="in" id="${I}" data-f="${esc(id)}" rows="3"${ph}>${esc(v)}</textarea>`;break;
+ case 'list':w=`<textarea class="in" id="${I}" data-f="${esc(id)}" rows="3" placeholder="One item per line">${esc(v)}</textarea>`;break;
+ case 'sel':w=`<select class="in" id="${I}" data-f="${esc(id)}"><option value="">—</option>${d.o.map(o=>`<option ${v===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`;break;
+ case 'coasel':w=`<select class="in" id="${I}" data-f="${esc(id)}"><option value="">—</option>${coas().map(c=>`<option value="${esc(c.id)}" ${v===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}</select>`;break;
+ case 'bool':return `<div class="fld" data-w="${esc(id)}"><label class="ck"><input type="checkbox" data-f="${esc(id)}" data-b="1" ${v!==false?'checked':''}> ${esc(L)}</label></div>`;
+ case 'img':w=`<div class="img">${isImg(v)?`<img src="${esc(v)}" alt="${esc(L)}"><button class="btn s x" data-act="clrimg" data-id="${esc(id)}">Remove image</button> `:''}<input type="file" accept="image/*" data-img="${esc(id)}" id="${I}" aria-label="${esc(L)}"></div>`;break;
  case 'check':{const vv=v||{};const keys=d.keys||(d.g||[]).flatMap(g=>g[1]);let i=0;
-  const grp=(d.g||[['',keys]]).map(g=>`${g[0]?`<div class="gh">${esc(g[0])}</div>`:''}${g[1].map(lab=>{const k=d.keys?d.keys[i]:lab;i++;return `<label class="ck"><input type="checkbox" data-f="${id}" data-k="${esc(k)}" ${vv[k]?'checked':''}> ${esc(lab)}</label>`}).join('')}`).join('');
-  w=`<div class="${d.g&&d.g.length>1?'cg':''}">${grp}</div>`;break}
+  const grp=(d.g||[['',keys]]).map(g=>`${g[0]?`<div class="gh">${esc(g[0])}</div>`:''}${g[1].map(lab=>{const k=d.keys?d.keys[i]:lab;i++;return `<label class="ck"><input type="checkbox" data-f="${esc(id)}" data-k="${esc(k)}" ${vv[k]?'checked':''}> ${esc(lab)}</label>`}).join('')}`).join('');
+  w=`<div class="${d.g&&d.g.length>1?'cg':''}" role="group" aria-labelledby="lb-${I}">${grp}</div>`;break}
  case 'table':{const rows=Array.isArray(v)?v:[];const cols=d.c;
-  w=`<div class="tw"><table class="ed stack"><thead><tr>${cols.map(c=>`<th>${esc(c[1])}</th>`).join('')}<th><span hidden>Delete</span></th></tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td>${c[2]?`<select class="cell in" data-f="${id}" data-r="${r._id}" data-c="${c[0]}" aria-label="${esc(c[1])}"><option value=""></option>${c[2].map(o=>`<option ${r[c[0]]===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`:`<textarea class="cell" rows="1" data-f="${id}" data-r="${r._id}" data-c="${c[0]}" aria-label="${esc(c[1])}">${esc(r[c[0]])}</textarea>`}</td>`).join('')}<td><button class="btn s x" data-act="delrow" data-id="${id}" data-r="${r._id}" aria-label="Delete row">✕</button></td></tr>`).join('')}</tbody></table></div><div class="row" style="margin-top:6px"><button class="btn s" data-act="addrow" data-id="${id}">+ Add row</button></div>`;break}
- case 'matrix':return `<div class="fld" data-w="${id}">${mxWidget()}</div>`;
- case 'annex':{const vv=v||{};w=`<div class="tw"><table class="ed stack"><thead><tr><th>Annex</th><th>Status</th></tr></thead><tbody>${ANNEX.map(([a,t])=>`<tr><td>${a}. ${esc(t)}</td><td><select class="cell in" data-f="${id}" data-k="${a}" aria-label="Annex ${a} status"><option value=""></option>${['Not required','In progress','Complete'].map(o=>`<option ${vv[a]===o?'selected':''}>${o}</option>`).join('')}</select></td></tr>`).join('')}</tbody></table></div>`;break}
+  w=`<div class="tw"><table class="ed stack" aria-labelledby="lb-${I}"><thead><tr>${cols.map(c=>`<th>${esc(c[1])}</th>`).join('')}<th><span hidden>Delete</span></th></tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td>${c[2]?`<select class="cell in" data-f="${esc(id)}" data-r="${esc(r._id)}" data-c="${c[0]}" aria-label="${esc(c[1])}"><option value=""></option>${c[2].map(o=>`<option ${r[c[0]]===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`:`<textarea class="cell" rows="1" data-f="${esc(id)}" data-r="${esc(r._id)}" data-c="${c[0]}" aria-label="${esc(c[1])}">${esc(r[c[0]])}</textarea>`}</td>`).join('')}<td><button class="btn s x" data-act="delrow" data-id="${esc(id)}" data-r="${esc(r._id)}" aria-label="Delete row">✕</button></td></tr>`).join('')}</tbody></table></div><div class="row" style="margin-top:6px"><button class="btn s" data-act="addrow" data-id="${esc(id)}">+ Add row</button></div>`;break}
+ case 'matrix':return `<div class="fld" data-w="${esc(id)}">${mxWidget()}</div>`;
+ case 'annex':{const vv=v||{};w=`<div class="tw"><table class="ed stack" aria-labelledby="lb-${I}"><thead><tr><th>Annex</th><th>Status</th></tr></thead><tbody>${ANNEX.map(([a,t])=>`<tr><td>${a}. ${esc(t)}</td><td><select class="cell in" data-f="${esc(id)}" data-k="${a}" aria-label="Annex ${a} status"><option value=""></option>${['Not required','In progress','Complete'].map(o=>`<option ${vv[a]===o?'selected':''}>${o}</option>`).join('')}</select></td></tr>`).join('')}</tbody></table></div>`;break}
  }
- const f=(d.fb||[]).length?`<p class="fb" data-fbh="${id}" ${has(id)||!src(id)?'hidden':''}>Empty — the brief will use the carried-forward value. <button class="btn s" data-act="pull" data-id="${id}">Copy it here to edit</button></p>`:'';
- return `<div class="fld" data-w="${id}">${d.t==='check'||d.t==='annex'?`<div class="lb">${esc(L)}</div>`:`<label for="${fid(id)}">${esc(L)}</label>`}${d.h?`<p class="hl">${esc(d.h)}</p>`:''}${w}${f}</div>`}
+ const f=(d.fb||[]).length?`<p class="fb" data-fbh="${esc(id)}" ${has(id)||!src(id)?'hidden':''}>Empty — the brief will use the carried-forward value. <button class="btn s" data-act="pull" data-id="${esc(id)}">Copy it here to edit</button></p>`:'';
+ return `<div class="fld" data-w="${esc(id)}">${d.t==='check'||d.t==='annex'||d.t==='table'?`<div class="lb" id="lb-${I}">${esc(L)}</div>`:`<label for="${I}">${esc(L)}</label>`}${d.h?`<p class="hl">${esc(d.h)}</p>`:''}${w}${f}</div>`}
 function mxWidget(){const cr=crit(),cs=retained();
  if(!cr.length||!cs.length)return `<p class="hl">The matrix appears once evaluation criteria (step 2 or above) and at least one retained COA (step 3) exist.</p>`;
  const m=V.matrix||{};
  return `<div class="lb" style="font-weight:700">Decision matrix — rank each COA from 1 to ${cs.length} per criterion (1 = best)</div><p class="hl">Weighted rank = rank × weight. Lowest total is preferred — a starting point for dialogue, not the decision (CALL 23-07).</p>
- <div class="tw"><table class="mx"><thead><tr><th>Criterion (weight)</th>${cs.map(c=>`<th>${esc(c.name)}</th>`).join('')}</tr></thead><tbody>${cr.map(r=>`<tr><td>${esc(r.ti)} (${esc(r.w||'1')})</td>${cs.map(c=>`<td><input inputmode="decimal" data-mx="${r._id}" data-c="${c.id}" value="${esc((m[r._id]||{})[c.id]??'')}" aria-label="${esc(r.ti)} rank for ${esc(c.name)}"></td>`).join('')}</tr>`).join('')}</tbody><tbody id="mxt">${mxTotals()}</tbody></table></div>`}
+ <div class="tw"><table class="mx"><thead><tr><th>Criterion (weight)</th>${cs.map(c=>`<th>${esc(c.name)}</th>`).join('')}</tr></thead><tbody>${cr.map(r=>`<tr><td>${esc(r.ti)} (${esc(r.w||'1')})</td>${cs.map(c=>`<td><input inputmode="decimal" data-mx="${esc(r._id)}" data-c="${esc(c.id)}" value="${esc((m[r._id]||{})[c.id]??'')}" aria-label="${esc(r.ti)} rank for ${esc(c.name)}"></td>`).join('')}</tr>`).join('')}</tbody><tbody id="mxt">${mxTotals()}</tbody></table></div>`}
 function mxTotals(){const x=mxCalc();const cs=retained();if(!cs.length)return '';
- return `<tr class="tot"><td>Total unweighted</td>${cs.map(c=>`<td>${x?x.tot[c.id].u:'—'}</td>`).join('')}</tr><tr class="tot"><td>Total weighted</td>${cs.map(c=>`<td class="${x&&x.best===c.id?'best':''}">${x?x.tot[c.id].w:'—'}${x&&x.best===c.id?' ✓':''}</td>`).join('')}</tr>`}
+ return `<tr class="tot"><td>Total unweighted</td>${cs.map(c=>`<td>${x?x.tot[c.id].u:'—'}</td>`).join('')}</tr><tr class="tot"><td>Total weighted</td>${cs.map(c=>`<td class="${x&&x.best===c.id?'best':''}">${x?x.tot[c.id].w:'—'}${x&&x.best===c.id?' ✓':''}</td>`).join('')}</tr>${x&&!x.complete?`<tr><td colspan="${cs.length+1}" class="warn" style="text-align:left">Incomplete — each cell needs a whole rank from 1 to ${cs.length}; no COA is marked preferred yet.</td></tr>`:''}`}
 function fmtDT(v){if(!v)return '';const d=new Date(v);return isNaN(d)?String(v):d.toLocaleString(undefined,{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}
 function calcTime(){const a=new Date(V.s1_t0),b=new Date(V.s1_t1);if(isNaN(a)||isNaN(b))return 'Enter both date-times to compute time available.';
  const ms=b-a;if(ms<=0)return '<span class="warn">Execution must be after receipt.</span>';const h=ms/36e5;const third=new Date(a.getTime()+ms/3);
- return `Time available: ${h.toFixed(1)} h · one-third mark (this HQ’s planning ends, two-thirds left to subordinates): ${esc(fmtDT(third))}`}
+ return `Time available: ${h.toFixed(1)} h · one-third mark (this HQ’s planning ends, two-thirds left to subordinates): ${esc(fmtDT(third))}<br><span class="hl">One-third, two-thirds rule — general doctrine; CALL 23-07 cautions that the XO timeline must account for each MDMP step.</span>`}
 function special_(k,n){
  if(k==='@time')return `<div class="g2">${W('s1_t0')}${W('s1_t1')}</div><p class="calc" id="calc">${calcTime()}</p>`;
  if(k==='@intake')return intakeCard();
@@ -718,18 +783,18 @@ function special_(k,n){
 function coaEditor(n){const list=n===3?coas():retained();
  const head=n===3?`<div class="row" style="margin-bottom:12px"><button class="btn p" data-act="addcoa">+ Add a COA</button><span class="hl" style="margin:0">Each COA needs a statement and a sketch. Uncheck “Retained for analysis” to drop it from steps 4–6.</span></div>`:'';
  if(!list.length)return head+`<p class="hl">${n===3?'No COA yet.':'No COA retained yet — develop COAs in <a href="#step-3">step 3</a>.'}</p>`;
- return head+list.map((c,i)=>`<details class="coa" data-coa="${c.id}" ${(OPEN.size?OPEN.has(c.id):i===0)?'open':''}><summary>${esc(c.name)} <span class="tag">${pc(coaFill(c,n))} %</span></summary><div class="cb">
- ${n===3?`<div class="row" style="margin:4px 0 10px"><label class="lb" for="cn-${c.id}" style="font-weight:700">Name</label><input class="in" style="max-width:280px" id="cn-${c.id}" data-coaname="${c.id}" value="${esc(c.name)}"><button class="btn s x" data-act="delcoa" data-id="${c.id}">Delete COA</button></div>`:''}
- ${COAG[n].map(([g,keys])=>`<h4>${esc(g)}</h4>${keys.map(k=>{const id='coa.'+c.id+'.'+k;if(k==='screen')return coaScreen(id);return W(id)}).join('')}`).join('')}</div></details>`).join('')}
+ return head+list.map((c,i)=>`<details class="coa" data-coa="${esc(c.id)}" ${(OPEN.size?OPEN.has(c.id):i===0)?'open':''}><summary>${esc(c.name)} <span class="tag">${pc(coaFill(c,n))} %</span></summary><div class="cb">
+ ${n===3?`<div class="row" style="margin:4px 0 10px"><label class="lb" for="cn-${esc(c.id)}" style="font-weight:700">Name</label><input class="in" style="max-width:280px" id="cn-${esc(c.id)}" data-coaname="${esc(c.id)}" value="${esc(c.name)}"><button class="btn s x" data-act="delcoa" data-id="${esc(c.id)}">Delete COA</button></div>`:''}
+ ${COAG[n].map(([g,keys])=>`<h3>${esc(g)}</h3>${keys.map(k=>{const id='coa.'+c.id+'.'+k;if(k==='screen')return coaScreen(id);return W(id)}).join('')}`).join('')}</div></details>`).join('')}
 const OPEN=new Set();
 document.addEventListener('toggle',e=>{const d=e.target;if(d.dataset&&d.dataset.coa){if(d.open)OPEN.add(d.dataset.coa);else OPEN.delete(d.dataset.coa)}},true);
-function coaScreen(id){const v=V[id]||{};return `<div class="fld"><div class="lb">Screening criteria</div>${SCREEN.map(([k,t])=>`<label class="ck"><input type="checkbox" data-f="${id}" data-k="${k}" ${v[k]?'checked':''}> ${esc(t)}</label>`).join('')}</div>`}
+function coaScreen(id){const v=V[id]||{};return `<div class="fld"><div class="lb">Screening criteria</div>${SCREEN.map(([k,t])=>`<label class="ck"><input type="checkbox" data-f="${esc(id)}" data-k="${k}" ${v[k]?'checked':''}> ${esc(t)}</label>`).join('')}</div>`}
 function coaFill(c,n){const keys=COAG[n].flatMap(g=>g[1]).filter(k=>!['retained','info','assump','r_stab','branches','dps'].includes(k));let f=0;for(const k of keys)if(filled(V['coa.'+c.id+'.'+k],CF[k][1]))f++;return keys.length?f/keys.length:0}
 
 /* ---------- RENDER: views ---------- */
 function briefCard(did){const D=DECKS[did],p=pc(deckFill(did));
- return `<div class="card ${D.k==='b'?'bc':'oc'}"><h3>${esc(D.n)}${D.opt?' <span class="tag">optional</span>':''}</h3>
- <div class="hl" style="margin:4px 0 0">${D.k==='b'?`Format — step ${D.s}, sub-step ${D.sub}`:'Output — generally contains'}</div>
+ return `<div class="card ${D.k==='b'?'bc':'oc'}"><h2>${esc(D.n)}${D.opt?' <span class="tag">optional</span>':''}</h2>
+ <div class="hl" style="margin:4px 0 0">${D.k==='b'?`Format — step ${D.s}, sub-step ${D.sub}`:did==='w3'?'Output — normally contains':'Output — generally contains'}</div>
  <div class="meter"><span class="pct" data-pc="${did}">${p} %</span><div class="bar"><i data-pb="${did}" style="width:${p}%"></i></div></div>
  <ol class="agenda">${D.items.map((it,i)=>{const f=itemFill(it);return `<li><span class="dot${dotc(f)}" data-it="${did}-${i}"></span><span>${it.g&&(i===0||D.items[i-1].g!==it.g)?`<b>${esc(it.g)}</b><br>`:''}${esc(it.t)}${it.src==='C'?' <span class="tag c">CALL</span>':''}</span></li>`}).join('')}</ol>
  ${W('bd_'+did)}
@@ -737,25 +802,25 @@ function briefCard(did){const D=DECKS[did],p=pc(deckFill(did));
 function stepView(n){const s=STEPS[n-1];const wide=innerWidth>=820;const sv=V['sub_'+n]||{},ov=V['out_'+n]||{};
  const subs=s.sub.map((x,i)=>`<li><label class="${x[1]||''}"><input type="checkbox" data-f="sub_${n}" data-k="s${i+1}" ${sv['s'+(i+1)]?'checked':''}><span class="k">${i+1}.</span><span>${esc(x[0])}</span></label></li>`).join('');
  const outs=s.out.map((x,i)=>`<label class="ck"><input type="checkbox" data-f="out_${n}" data-k="o${i+1}" ${ov['o'+(i+1)]?'checked':''}> ${esc(x)}</label>`).join('');
- const secs=SECS[n].map(sec=>sec.f[0]==='@intake'?`<section class="sec">${intakeCard()}</section>`:`<section class="sec ${sec.o?'out':''}"><h3>${esc(sec.h)}${sec.o?` <span class="tag c">output</span>`:''}</h3>${sec.n?`<p class="note">${esc(sec.n)}</p>`:''}${sec.f.map(f=>f[0]==='@'?special_(f,n):W(f)).join('')}</section>`).join('');
- const decks=s.decks.length?s.decks.map(briefCard).join(''):`<div class="card bc"><h3>Feeds the COA decision brief</h3><p class="hl">The recommended COA, the decision matrix and each COA's advantages and disadvantages are briefed in step 6.</p><a class="btn a" href="#step-6">Go to step 6</a></div>`;
+ const secs=SECS[n].map(sec=>sec.f[0]==='@intake'?`<section class="sec">${intakeCard()}</section>`:`<section class="sec ${sec.o?'out':''}"><h2>${esc(sec.h)}${sec.o?` <span class="tag c">output</span>`:''}</h2>${sec.n?`<p class="note">${esc(sec.n)}</p>`:''}${sec.f.map(f=>f[0]==='@'?special_(f,n):W(f)).join('')}</section>`).join('');
+ const decks=s.decks.length?s.decks.map(briefCard).join(''):`<div class="card bc"><h2>Feeds the COA decision brief</h2><p class="hl">The recommended COA, the decision matrix and each COA's advantages and disadvantages are briefed in step 6.</p><a class="btn a" href="#step-6">Go to step 6</a></div>`;
  const qk=(s.decks.length?s.decks:['dec']).map(d=>`<button class="btn s ${DECKS[d].k==='b'?'a':''}" data-act="present" data-id="${d}">Present: ${esc(DECKS[d].n)}</button>`).join('');
  return `<h1>Step ${n}. ${esc(s.t)}</h1><p class="lead">${esc(s.p)}</p><div class="row qk">${qk}</div>
- <div class="sv"><div class="side"><div><div class="card"><details class="ls" ${wide?'open':''}><summary><h3 style="display:inline">Sub-steps</h3> <span class="hl" data-sp="${n}">${subProg(n)[0]} / ${subProg(n)[1]} sub-steps</span></summary><ol class="ss">${subs}</ol><p class="hl" style="margin-top:8px">Yellow: briefing format · green: output</p></details></div>
- <div class="card"><details class="ls" ${wide?'open':''}><summary><h3 style="display:inline">Key outputs</h3></summary><div style="margin-top:6px">${outs}</div></details></div>
+ <div class="sv"><div class="side"><div><div class="card"><details class="ls" ${wide?'open':''}><summary><h2 style="display:inline">Sub-steps</h2> <span class="hl" data-sp="${n}">${subProg(n)[0]} / ${subProg(n)[1]} sub-steps</span></summary><ol class="ss">${subs}</ol><p class="hl" style="margin-top:8px">Yellow: briefing format · green: output</p></details></div>
+ <div class="card"><details class="ls" ${wide?'open':''}><summary><h2 style="display:inline">${n===7?'Key products':'Key outputs'}</h2>${n===7?' <span class="hl">QRG base order format; CALL ch. 10</span>':''}</summary><div style="margin-top:6px">${outs}</div></details></div>
  <div class="card"><details class="ls"><summary>CALL 23-07 — lessons and best practices</summary><ul>${LESS[n].map(l=>`<li>${esc(l)}</li>`).join('')}</ul></details></div></div></div>
  <div class="wk">${secs}<div class="row">${n>1?`<a class="btn" href="#step-${n-1}">◀ Step ${n-1}</a>`:''}${n<7?`<a class="btn p" href="#step-${n+1}">Step ${n+1} ▶</a>`:''}</div></div>
  <div class="rt"><div>${decks}</div></div></div>`}
 function overview(){
- const rows=Object.entries(DECKS).map(([id,D])=>{const p=pc(deckFill(id));return `<tr><td><b>${esc(D.n)}</b>${D.opt?' <span class="tag">optional</span>':''}</td><td><a href="#step-${D.s}">Step ${D.s}</a></td><td class="num"><span class="bar"><i data-pb="${id}" style="width:${p}%;background:var(--${D.k==='b'?'amber':'green'})"></i></span><span data-pc="${id}">${p} %</span></td><td><button class="btn s ${D.k==='b'?'a':''}" data-act="present" data-id="${id}">Present</button></td></tr>`}).join('');
+ const rows=Object.entries(DECKS).map(([id,D])=>{const p=pc(deckFill(id));return `<tr><td><b>${esc(D.n)}</b>${D.opt?' <span class="tag">optional</span>':''}</td><td><a href="#step-${D.s}">Step ${D.s}</a></td><td class="num"><span class="bar"><i data-pb="${esc(id)}" style="width:${p}%;background:var(--${D.k==='b'?'amber':'green'})"></i></span><span data-pc="${esc(id)}">${p} %</span></td><td><button class="btn s ${D.k==='b'?'a':''}" data-act="present" data-id="${esc(id)}">Present</button></td></tr>`}).join('');
  return `<h1>MDMP restitution</h1><p class="lead">Drop the higher order and its annexes to pre-fill the analysis, then work through the seven steps; each briefing and warning order assembles itself, in doctrinal order, from what you enter. Present it here, export it to PowerPoint or HTML, or copy it as text. Empty items stay visible on the slides as “not yet developed”.</p>
  <div style="margin-top:22px">${intakeCard()}</div>
- <div class="ov"><div class="card"><h3>Exercise header</h3><p class="hl" style="margin-top:4px">Shown on every title slide and footer.</p>${['hdr_op','hdr_unit','hdr_hhq','hdr_class'].map(x=>W(x)).join('')}
+ <div class="ov"><div class="card"><h2>Exercise header</h2><p class="hl" style="margin-top:4px">Shown on every title slide and footer.</p>${['hdr_op','hdr_unit','hdr_hhq','hdr_class'].map(x=>W(x)).join('')}
  <p class="hl">${esc(wsLabel())} — switch or back up in <a href="#data">Data</a>.</p></div>
- <div class="card"><h3>Briefings and orders</h3><div class="tw"><table class="dk stack"><thead><tr><th>Product</th><th>Step</th><th>Completeness</th><th>Restitution</th></tr></thead><tbody>${rows}</tbody></table></div>
- <p class="hl" style="margin-top:10px">Completeness counts the required items of each QRG format; optional items (e.g., deception guidance, images) do not lower it.</p><a class="btn p" href="#step-1">Start with step 1 ▶</a></div></div>`}
+ <div class="card"><h2>Briefings and orders</h2><div class="tw"><table class="dk stack"><thead><tr><th>Product</th><th>Step</th><th>Completeness</th><th>Restitution</th></tr></thead><tbody>${rows}</tbody></table></div>
+ <p class="hl" style="margin-top:10px">Completeness counts the items of each QRG format that the tool treats as required; items it treats as optional (deception guidance, financial management, images…) do not lower it.</p><a class="btn p" href="#step-1">Start with step 1 ▶</a></div></div>`}
 function reference(){
- const box=(h,body)=>`<div class="card"><h3>${h}</h3>${body}</div>`;const ul=a=>`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+ const box=(h,body)=>`<div class="card"><h2>${h}</h2>${body}</div>`;const ul=a=>`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
  return `<h1>Reference</h1><p class="lead">Doctrinal aids from the QRG (v25.2) and points from CALL 23-07 used by the briefings.</p>
  <div class="refg">
  ${box('IPOE — steps and products',IPOE.map(g=>`<p style="margin:8px 0 2px"><b>${esc(g[0])}</b></p>${ul(g[1])}`).join('')+'<p class="hl" style="margin-top:8px">Staff input to IPOE and collection management: FM 2-0, Oct 23, table 3-2.</p>')}
@@ -766,21 +831,21 @@ function reference(){
  ${box('War-gaming',ul(['Methods: belt (modified belt: no more than three belts), avenue-in-depth, box.','Recording: synchronization matrix, sketch note, or both.','Cycle: action — reaction — counteraction, adjudicated; the XO is the unbiased controller.']))}
  ${box('Operational approach and framework',ul(['Defeat mechanisms: destroy, dislocate, disintegrate, isolate. Stability mechanisms: compel, control, influence, support.','Operational framework: assigned areas (AO, zone, sector); deep, close and rear operations; main effort, supporting effort and reserve.','Combat power: leadership, firepower, information, mobility, survivability.','Command relationships: organic, assigned, attached, OPCON, TACON. Support: DS, GS, R, GSR.']))}
  ${box('Army planning processes',ul(['Operations process: plan, prepare, execute, assess. Commander: understand, visualize, describe, direct, lead, assess.','ADM (conceptual) · MDMP (detailed) · TLP (platoon and company) · RDSP (during execution only).']))}
- ${box('Tactical tasks and purposes (FM 3-90)',`<ul class="tasks">${TASKS.map(t=>`<li>${esc(t)}</li>`).join('')}</ul><p style="margin:10px 0 2px"><b>Purposes</b></p><p style="margin:0;font-size:15px">${PURP.join(' · ')}</p>`)}
- ${box('Briefing discipline (CALL 23-07)',ul(['Use doctrinal briefing agendas in the given order: the audience expects it, and moved items read as missing.','The COA brief is not an OPORD brief; do not overdevelop.','The OPORD brief is not the order pasted into slides: maps, overlays, graphics, interactions, critical events.','Focus on unit fighting products; the brief is a by-product.']))}
+ ${box('Tactical tasks and purposes (FM 3-90)',TASKG.map(([g,a])=>`<p style="margin:8px 0 2px"><b>${esc(g)}</b></p><ul class="tasks">${a.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`).join('')+`<p class="hl" style="margin-top:6px">Block and Turn as tactical mission tasks are not the obstacle effects of the same name.</p>`+`<p style="margin:10px 0 2px"><b>Purposes</b></p><p style="margin:0;font-size:15px">${PURP.join(' · ')}</p>`)}
+ ${box('Briefing discipline (CALL 23-07)',ul(['Use doctrinal briefing agendas in the given order: the audience expects it, and moved items read as missing.','The COA brief is not an OPORD brief; do not overdevelop.','The OPORD brief is not the order pasted into slides: maps, overlays, graphics, interactions, critical events.','Focus on producing unit fighting products, not on reaching the next brief; fighting products and the OPORD are by-products of an effective MDMP.']))}
  ${box('Source versions',ul(['QRG v25.2 (27 Aug 25) follows FM 5-0, Nov 24: the structure, sub-steps, outputs and briefing formats of this tool.','CALL 23-07 (Nov 23) follows FM 5-0, Nov 22 and ATP 5-0.2-1: it uses “IPB” and numbers some sub-steps and annexes differently. Its lessons are paraphrased here; items it adds to a format are tagged CALL.']))}
  </div>`}
 function dataView(){const dl=!!ST.dl;
  return `<h1>Data</h1><p class="lead">Your work is saved to your account for this page${ST.col?'':' (currently unavailable — this browser only)'}. Personal work is private to you. A team workspace is shared by everyone who opens this page and types the same name.</p>
- <div class="ov"><div class="card"><h3>Workspace</h3><p>Current: <b>${esc(wsLabel())}</b></p>
+ <div class="ov"><div class="card"><h2>Workspace</h2><p>Current: <b>${esc(wsLabel())}</b></p>
  <div class="row" style="margin:10px 0"><button class="btn ${ST.ws==='personal'?'p':''}" data-act="wsp">Personal</button></div>
  <label class="lb" for="tn" style="font-weight:700">Team workspace name</label><p class="hl">Letters, digits and hyphens. Anyone with access to this page who enters the same name edits the same MDMP.</p>
  <div class="row"><input class="in" id="tn" style="max-width:260px" value="${ST.ws.startsWith('team:')?esc(ST.ws.slice(5)):''}"><button class="btn" data-act="wst">Open team workspace</button></div></div>
- <div class="card"><h3>Backup and transfer</h3><p class="hl">Export everything (including images) as JSON, then import it in another workspace or browser.</p>
- <div class="row">${dl||standalone()?'<button class="btn p" data-act="xjson">Download JSON</button>':''}<button class="btn" data-act="cjson">Copy JSON</button><label class="btn" for="ijf">Import file</label><input type="file" id="ijf" hidden><button class="btn" data-act="pjson">Paste JSON</button></div>
- <h3 style="margin-top:22px">Reset</h3><p class="hl">Erase every field of the current workspace.</p><button class="btn x" data-act="reset">Erase workspace</button></div></div>`}
+ <div class="card"><h2>Backup and transfer</h2><p class="hl">Export everything (including images) as JSON, then import it in another workspace or browser.</p>
+ <div class="row">${dl||standalone()?'<button class="btn p" data-act="xjson">Download JSON</button>':''}<button class="btn" data-act="cjson">Copy JSON</button><button type="button" class="btn" data-act="pick" data-id="ijf">Import file</button><input type="file" id="ijf" hidden><button class="btn" data-act="pjson">Paste JSON</button></div>
+ <h2 style="margin-top:22px">Reset</h2><p class="hl">Erase every field of the current workspace.</p><button class="btn x" data-act="reset">Erase workspace</button></div></div>`}
 /* ---------- DASHBOARD (read-only view of the existing data) ---------- */
-function clsColor(t){t=String(t||'').toUpperCase();return /TOP SECRET/.test(t)?'#ff8c00':/SECRET/.test(t)?'#c8102e':/CONFIDENTIAL/.test(t)?'#0033a0':/\bCUI\b/.test(t)?'#502b85':'#007a33'}
+function clsColor(t){t=String(t||'').toUpperCase();return /TS\/\/SCI|\bSCI\b/.test(t)?'#fce83a':/TOP SECRET/.test(t)?'#ff8c00':/SECRET/.test(t)?'#c8102e':/CONFIDENTIAL/.test(t)?'#0033a0':/\bCUI\b|CONTROLLED UNCLASSIFIED/.test(t)?'#502b85':/UNCLASSIFIED/.test(t)?'#007a33':'#5b6673'}
 const card=(cls,title,src,href,body)=>`<section class="dc ${cls}"><header><span class="t">${esc(title)}</span>${src?`<span class="src">${esc(src)}</span>`:''}${href?`<a href="${href}">Open</a>`:''}</header><div class="bd">${body}</div></section>`;
 const emp=t=>`<p class="emp">${esc(t||'Not yet developed')}</p>`;
 const ul=a=>a.length?`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'';
@@ -826,8 +891,8 @@ function dashboard(){
   <p style="font-size:14px">${has('coa.'+c.id+'.statement')?esc(String(V['coa.'+c.id+'.statement']).slice(0,180))+(String(V['coa.'+c.id+'.statement']).length>180?'…':''):'<span class="emp">No statement yet</span>'}</p>
   ${t?`<p class="hl" style="margin:0">Weighted total ${t.w} · unweighted ${t.u}${mx.best===c.id?' — lowest':''}</p>`:''}</div>`}).join('')}</div><p class="hl" style="margin-top:8px">Screening: F feasible · A acceptable · S suitable · D distinguishable · C complete</p>`:emp('No COA developed yet');
  // intake
- const I=V.intake;const ixBody=I&&I.docs?`<p>${esc(I.docs.length)} document${I.docs.length>1?'s':''} read for <b>${esc(I.unit)}</b></p>${ul(I.docs.map(d=>roleShort(d.role)+' — '+d.name))}<p class="hl">${I.applied?`Applied ${esc(fmtDT(I.applied))} · ${I.appliedN} fields filled`:`${I.props?I.props.length:0} proposals awaiting review`}</p>`:emp('No higher order loaded');
- const hdr=`${V.hdr_class?`<div class="cls" style="background:${clsColor(V.hdr_class)}">${esc(V.hdr_class)}</div>`:''}
+ const I=V.intake;const ixBody=I&&I.docs?`<p>${esc(I.docs.length)} document${I.docs.length>1?'s':''} read for <b>${esc(I.unit)}</b></p>${ul(I.docs.map(d=>roleShort(d.role)+' — '+d.name))}<p class="hl">${I.applied?`Applied ${esc(fmtDT(I.applied))} · ${+I.appliedN||0} fields filled`:`${I.props?I.props.length:0} proposals awaiting review`}</p>`:emp('No higher order loaded');
+ const hdr=`${V.hdr_class?`<div class="cls" style="background:${clsColor(V.hdr_class)};color:${clsFg(clsColor(V.hdr_class))}">${esc(V.hdr_class)}</div>`:''}
  <div class="dbh"><div><h1>${esc(V.hdr_op||'Planning dashboard')}</h1><div class="meta">${esc([V.hdr_unit,V.hdr_hhq?'Higher HQ: '+V.hdr_hhq:''].filter(Boolean).join(' · ')||'Set the exercise header in Overview')}</div></div><span class="live"><i></i><span>${esc($('#sav').textContent)}</span></span></div>`;
  return hdr+`<div class="db">
  ${kpi(pc(tot?dn/tot:0)+' %','MDMP progress',dn+' of '+tot+' sub-steps','#step-'+cur)}
@@ -846,10 +911,11 @@ function dashboard(){
  ${card('s8','Courses of action','Steps 3 to 6','#step-3',coaBody)}
  ${card('s4','Higher order','Intake','#overview',ixBody)}
  </div>`}
-function render(){nav();strip();const r=route();const v=$('#view');
+function render(){try{renderInner()}catch(e){console.error(e);try{nav()}catch(x){}let dv='';if(route().v==='data'){try{dv=dataView()}catch(x){}}$('#view').innerHTML=`<div class="card"><p class="warn">Saved data could not be displayed.</p><p>Open <a href="#data">Data</a> to export a backup or erase the workspace.</p></div>`+dv}}
+function renderInner(){nav();strip();const r=route();const v=$('#view');
  $('#strip').hidden=r.v==='dashboard';document.body.classList.toggle('dbv',r.v==='dashboard');
  v.innerHTML=r.v==='step'?stepView(r.n):r.v==='dashboard'?dashboard():r.v==='reference'?reference():r.v==='data'?dataView():overview();
- document.title=(r.v==='step'?'Step '+r.n+' · ':r.v==='dashboard'?'Dashboard · ':'')+'MDMP Restitution Tool'}
+ document.title=(r.v==='step'?'Step '+r.n+' · ':r.v==='dashboard'?'Dashboard · ':'')+'MDMP Restitution Tool';centerCur()}
 
 /* ---------- EVENTS ---------- */
 function tableSet(id,r,c,val){const rows=(Array.isArray(V[id])?V[id]:[]).map(x=>x._id===r?{...x,[c]:val}:x);setV(id,rows)}
@@ -859,9 +925,9 @@ view.addEventListener('input',e=>{const el=e.target;
  if(el.dataset.mx){const m={...(V.matrix||{})};const r=el.dataset.mx;m[r]={...(m[r]||{}),[el.dataset.c]:el.value.trim()};setV('matrix',m);return}
  if(el.dataset.coaname){setV('coas',coas().map(c=>c.id===el.dataset.coaname?{...c,name:el.value}:c));const s=el.closest('details').querySelector('summary');if(s&&s.firstChild)s.firstChild.textContent=el.value+' ';return}
  const id=el.dataset.f;if(!id||el.type==='checkbox')return;
- if(el.dataset.r){tableSet(id,el.dataset.r,el.dataset.c,el.value);return}
+ if(el.dataset.r){tableSet(id,el.dataset.r,el.dataset.c,el.value);if(id==='criteria'&&$('[data-w="matrix"]'))rewidget('matrix');return}
  if(el.dataset.k!==undefined){setV(id,{...(V[id]||{}),[el.dataset.k]:el.value});return}
- setV(id,el.value)});
+ setV(id,el.value);$$(`[data-f="${CSS.escape(id)}"]`).forEach(x=>{if(x!==el&&!x.dataset.r&&x.type!=='checkbox'&&x.type!=='file')x.value=el.value})});
 view.addEventListener('change',e=>{const el=e.target;
  if(el.type==='checkbox'&&el.dataset.f){const id=el.dataset.f;if(el.dataset.b){setV(id,el.checked);if(route().v==='step')return}else setV(id,{...(V[id]||{}),[el.dataset.k]:el.checked});return}
  if(el.id==='ixf'&&el.files){[...el.files].forEach(ixAdd);return}
@@ -872,14 +938,14 @@ view.addEventListener('change',e=>{const el=e.target;
 document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,id=b.dataset.id;
  const two=(msg,fn)=>{if(b.dataset.arm){fn();return}b.dataset.arm=1;const t=b.textContent;b.textContent=msg;setTimeout(()=>{if(b.isConnected){delete b.dataset.arm;b.textContent=t}},3500)};
  switch(a){
- case 'addrow':setV(id,[...(Array.isArray(V[id])?V[id]:[]),{_id:uid()}]);rewidget(id);break;
- case 'delrow':setV(id,(V[id]||[]).filter(r=>r._id!==b.dataset.r));rewidget(id);break;
+ case 'addrow':setV(id,[...(Array.isArray(V[id])?V[id]:[]),{_id:uid()}]);rewidget(id);if(id==='criteria'&&$('[data-w="matrix"]'))rewidget('matrix');break;
+ case 'delrow':setV(id,(V[id]||[]).filter(r=>r._id!==b.dataset.r));rewidget(id);if(id==='criteria'&&$('[data-w="matrix"]'))rewidget('matrix');break;
  case 'clrimg':setV(id,'');rewidget(id);break;
  case 'pull':{const f=src(id);if(!f)break;let v;if(VIRT[f])v=VIRT[f].r.filter(has).map(r=>{const x=V[r];return def(r).l+': '+(def(r).t==='list'?lines(x).join('; '):x)}).join('\n');else if(f.startsWith('@acoa:'))v=V[special(f).id];else if(def(f).t==='table')v=val2blk(f).d.rows.map(r=>r.filter(Boolean).join(' — ')).join('\n');else if(def(f).t==='list')v=lines(V[f]).join('\n');else v=V[f];setV(id,v);rewidget(id);break}
  case 'compose':{const p=['ms_when','ms_who','ms_what','ms_where','ms_why'].map(k=>String(V[k]||'').trim());if(!p.some(Boolean)){toast('Fill the five elements first');break}
   let s=(p[0]?p[0]+', ':'')+[p[1],p[2],p[3],p[4]].filter(Boolean).join(' ');s=s.replace(/\s+/g,' ').trim();if(!/[.!]$/.test(s))s+='.';setV('mission',s.charAt(0).toUpperCase()+s.slice(1));rewidget('mission');toast('Mission statement composed — edit as needed');break}
  case 'addcoa':{const n=coas().length+1,nid='c'+uid();if(!OPEN.size&&coas()[0])OPEN.add(coas()[0].id);OPEN.add(nid);setV('coas',[...coas(),{id:nid,name:'COA '+n}]);render();const el=$(`[data-coa="${nid}"]`);if(el)el.scrollIntoView({block:'start'});break}
- case 'delcoa':two('Click again to delete',()=>{const cid=id;setV('coas',coas().filter(c=>c.id!==cid));for(const k of Object.keys(V))if(k.startsWith('coa.'+cid+'.'))setV(k,null);render()});break;
+ case 'delcoa':two('Click again to delete',()=>{const cid=id;setV('coas',coas().filter(c=>c.id!==cid));['rec_coa','approved_coa'].forEach(k=>{if(V[k]===cid)setV(k,null)});for(const k of Object.keys(V))if(k.startsWith('coa.'+cid+'.'))setV(k,null);render()});break;
  case 'present':openDeck(id);break;
  case 'pptx':exportPPTX(id||DK.id,b);break;
  case 'html':exportHTML(id||DK.id);break;
@@ -891,22 +957,24 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(
  case 'wst':{const n=($('#tn').value||'').trim().replace(/[^A-Za-z0-9-]/g,'-').replace(/-+/g,'-').slice(0,60);if(!n){toast('Enter a team name');break}switchWS('team:'+n);break}
  case 'xjson':save('MDMP_'+(V.hdr_op||'workspace').replace(/[^A-Za-z0-9-]+/g,'_')+'.json',JSON.stringify({mdmp:1,v:V},null,1));break;
  case 'cjson':copyOut(JSON.stringify({mdmp:1,v:V}),'JSON copied');break;
- case 'pjson':dialog(`<h3>Paste JSON</h3><p class="hl">Replaces the content of the current workspace.</p><textarea id="pj" aria-label="JSON"></textarea><div class="row" style="margin-top:10px"><button class="btn p" data-act="pjgo">Import</button><button class="btn" data-act="dlgx">Cancel</button></div>`);break;
+ case 'pjson':dialog(`<h2>Paste JSON</h2><p class="hl">Replaces the content of the current workspace.</p><textarea id="pj" aria-label="JSON"></textarea><div class="row" style="margin-top:10px"><button class="btn p" data-act="pjgo">Import</button><button class="btn" data-act="dlgx">Cancel</button></div>`);break;
  case 'pjgo':importJSON($('#pj').value);break;
  case 'dlgx':$('#dlg').hidden=true;break;
+ case 'skip':e.preventDefault();$('#view').focus();break;
+ case 'pick':{const f=$('#'+id);if(f)f.click();break}
  case 'ixgo':ixRun();break;
  case 'ixstop':if(IX.ctl)IX.ctl.abort();break;
  case 'ixdel':IX.files=IX.files.filter(f=>f.id!==id);ixDraw();break;
  case 'ixpaste':{const t=($('#ixt')||{}).value||'';if(!t.trim()){toast('Paste the order text first');break}const n=IX.files.filter(f=>f.name.startsWith('Pasted text')).length+1;ixAdd(new File([t],'Pasted text '+n+'.txt',{type:'text/plain'}));break}
  case 'ixapply':ixApply();break;
  case 'ixdiscard':two('Click again to discard',()=>{setV('intake',null);IX.msg='';ixDraw()});break;
- case 'reset':two('Click again to erase everything',()=>{for(const k of Object.keys(V))setV(k,null);V={};saveLocal();render();toast('Workspace erased')});break}});
-function switchWS(w){for(const k of Object.keys(ST.timers)){clearTimeout(ST.timers[k]);delete ST.timers[k];if(ST.col)flush(k)}ST.ws=w;try{localStorage.setItem('mdmp:ws',w)}catch(e){}ST.col=null;connect();toast('Opened '+wsLabel())}
-function importJSON(t){let o;try{o=JSON.parse(t)}catch(e){toast('Not valid JSON');return}const nv=o&&o.mdmp?o.v:o;if(!nv||typeof nv!=='object'){toast('Nothing to import');return}
+ case 'reset':two('Click again to erase everything',()=>{const ks=Object.keys(V);for(const k of ks){V[k]=null;ST.dirty.add(k);clearTimeout(ST.timers[k]);delete ST.timers[k];flush(k)}V={};saveLocalNow();render();toast('Workspace erased')});break}});
+function switchWS(w){const col=ST.col;for(const k of Object.keys(ST.timers)){clearTimeout(ST.timers[k]);delete ST.timers[k];if(col)flush(k,col)}saveLocalNow();ST.ws=w;try{localStorage.setItem('mdmp:ws',w)}catch(e){}ST.col=null;connect();toast('Opened '+wsLabel())}
+function importJSON(t){let o;try{o=JSON.parse(t)}catch(e){toast('Not valid JSON');return}const raw=o&&o.mdmp?o.v:o;if(!isObj(raw)){toast('Nothing to import');return}const nv=cleanAll(raw);
  for(const k of Object.keys(V))if(!(k in nv))setV(k,null);for(const k of Object.keys(nv))setV(k,nv[k]);$('#dlg').hidden=true;render();toast('Imported')}
 function dialog(h){$('#dlgc').innerHTML=h;$('#dlg').hidden=false;const t=$('#dlgc textarea,#dlgc button');if(t)t.focus()}
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)}
-async function copyOut(text,msg){try{await navigator.clipboard.writeText(text);toast(msg)}catch(e){dialog(`<h3>Copy</h3><p class="hl">Select all and copy.</p><textarea readonly>${esc(text)}</textarea><div class="row" style="margin-top:10px"><button class="btn" data-act="dlgx">Close</button></div>`);const ta=$('#dlgc textarea');ta.focus();ta.select()}}
+async function copyOut(text,msg){try{await navigator.clipboard.writeText(text);toast(msg)}catch(e){dialog(`<h2>Copy</h2><p class="hl">Select all and copy.</p><textarea readonly>${esc(text)}</textarea><div class="row" style="margin-top:10px"><button class="btn" data-act="dlgx">Close</button></div>`);const ta=$('#dlgc textarea');ta.focus();ta.select()}}
 const standalone=()=>!window.claude;
 async function save(name,data){if(!ST.dl&&standalone()){try{const u=URL.createObjectURL(data instanceof Blob?data:new Blob([data]));const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);return true}catch(e){toast('Download failed');return false}}
  if(!ST.dl){toast('File downloads are not available here — use Copy');return false}
@@ -918,6 +986,7 @@ function loadImg(id,file){const fr=new FileReader();fr.onload=()=>{const im=new 
 
 /* ---------- DECK ---------- */
 const DK={id:null,sl:[],i:0};
+const clsFg=c=>c==='#fce83a'||c==='#ff8c00'?'#111':'#fff';
 function hdrMeta(did){return {cls:String(V.hdr_class||'').trim(),unit:V.hdr_unit||'',op:V.hdr_op||'',hhq:V.hdr_hhq||'',when:V['bd_'+did]||''}}
 function slides(did){const D=DECKS[did];const hide=$('#dke')&&$('#dke').checked;const out=[];
  out.push({ty:'title'});out.push({ty:'agenda'});
@@ -936,21 +1005,22 @@ function blkHTML(b){const fr=b.from?`<div class="fr">Carried from ${esc(b.from)}
  return `<div class="bk"><div class="bh">${esc(b.h)}</div>${lines2p(b.d)}${fr}</div>`}
 const isSrc=x=>/^\s*\[[^\]]+\]\s*$/.test(x);
 const lines2p=s=>String(s).split('\n').filter(x=>x.trim()).map(x=>isSrc(x)?`<p class="fr">${esc(x)}</p>`:`<p>${esc(x)}</p>`).join('');
-function slideHTML(did,s,i,n){const D=DECKS[did],M=hdrMeta(did);const mk=`<div class="mk">${esc(M.cls)}</div>`,mkb=`<div class="mk">${esc(M.cls)}</div>`;
+function slideHTML(did,s,i,n){const D=DECKS[did],M=hdrMeta(did);const cc=M.cls?clsColor(M.cls):'';const mst=M.cls?` style="background:${cc};color:${clsFg(cc)}"`:'';const mk=`<div class="mk"${mst}>${esc(M.cls)}</div>`,mkb=mk;
  const foot=`<div class="sf"><span>${esc([M.unit,M.op].filter(Boolean).join(' · '))}</span><span>${esc(D.n)} · ${i+1} / ${n}</span></div>`;
  if(s.ty==='title')return `<section class="slide ttl">${mk}<div class="band"><div class="kick">${esc(M.op||'Operation')}</div><h3>${esc(D.n)}</h3><div class="sub">MDMP step ${D.s}${D.sub?', sub-step '+D.sub:''}</div><div class="meta">${M.unit?esc(M.unit)+'<br>':''}${M.hhq?'Higher HQ: '+esc(M.hhq)+'<br>':''}${esc(M.when)}</div></div>${foot}${mkb}</section>`;
  if(s.ty==='agenda'){let g='';return `<section class="slide">${mk}<div class="band"><div class="kick">${esc(D.n)}</div><h3>Agenda</h3></div><div class="sb"><ul class="ag">${D.items.map((it,k)=>{const f=itemFill(it);const gh=it.g&&it.g!==g?(g=it.g,`<li style="font-weight:700;color:#1f4e8c">${esc(it.g)}</li>`):'';return gh+`<li><i class="${dotc(f).trim()}"></i><span>${esc(it.t)}</span></li>`}).join('')}</ul></div>${foot}${mkb}</section>`}
  const imgs=s.bl.filter(b=>b.ty==='img');const solo=s.bl.length===1&&!s.bl[0].from&&s.bl[0].ty!=='none';const txt=s.bl.map(blkHTML).join('').replace(solo?/<div class="bh">[^<]*<\/div>/:/$^/,'');
- const pic=imgs.map(b=>`<div class="pic"><div class="bh">${esc(b.h)}</div><img src="${b.d}" alt="${esc(b.h)}">${b.from?`<div class="fr">Carried from ${esc(b.from)}</div>`:''}</div>`).join('');
+ const pic=imgs.map(b=>`<div class="pic"><div class="bh">${esc(b.h)}</div><img src="${esc(b.d)}" alt="${esc(b.h)}">${b.from?`<div class="fr">Carried from ${esc(b.from)}</div>`:''}</div>`).join('');
  return `<section class="slide">${mk}<div class="band"><div class="kick">${esc(D.n)} · item ${s.ix+1}${s.src==='C'?' · CALL 23-07':''}${s.g?' · '+esc(s.g):''}</div><h3>${esc(s.t)}</h3>${s.sub?`<div class="sub">${esc(s.sub)}</div>`:''}</div><div class="sb ${imgs.length&&txt?'two':''}">${txt?`<div>${txt}</div>`:''}${pic}</div>${foot}${mkb}</section>`}
-function openDeck(did){DK.id=did;DK.sl=slides(did);DK.i=0;$('#dkt').textContent=DECKS[did].n;drawDeck();$('#deck').hidden=false;document.body.style.overflow='hidden';$('#slides').focus()}
+const BG=()=>['header.top','#strip','main','footer.foot'].map(x=>$(x)).filter(Boolean);
+function openDeck(did){DK.ret=document.activeElement;DK.id=did;DK.sl=slides(did);DK.i=0;$('#dkt').textContent=DECKS[did].n;$('#deck').hidden=false;$('#slides').scrollLeft=0;drawDeck();BG().forEach(e=>e.inert=true);document.body.style.overflow='hidden';$('#slides').focus()}
 function drawDeck(){const n=DK.sl.length;$('#slides').innerHTML=DK.sl.map((s,i)=>`<div class="sw" data-i="${i}">${slideHTML(DK.id,s,i,n)}</div>`).join('');go(Math.min(DK.i,n-1),1)}
 function go(i,inst){const n=DK.sl.length;if(i<0||i>=n)return;DK.i=i;const w=$$('#slides .sw')[i];if(w)$('#slides').scrollTo({left:w.offsetLeft,behavior:'auto'});$('#dkn').textContent=`${i+1} / ${n}`}
-function closeDeck(){$('#deck').hidden=true;document.body.style.overflow='';if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})}
+function closeDeck(){$('#deck').hidden=true;BG().forEach(e=>e.inert=false);document.body.style.overflow='';try{if(DK.ret&&DK.ret.isConnected)DK.ret.focus()}catch(e){}if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})}
 $('#slides').addEventListener('scroll',()=>{clearTimeout(DK.st);DK.st=setTimeout(()=>{const sc=$('#slides');const i=Math.round(sc.scrollLeft/sc.clientWidth);if(i!==DK.i&&i>=0&&i<DK.sl.length){DK.i=i;$('#dkn').textContent=`${i+1} / ${DK.sl.length}`}},80)});
 $('#dke').addEventListener('change',()=>{if(DK.id){DK.sl=slides(DK.id);drawDeck()}});
-document.addEventListener('keydown',e=>{if($('#deck').hidden){if(e.key==='Escape'&&!$('#dlg').hidden)$('#dlg').hidden=true;return}
- if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();go(DK.i+1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(DK.i-1)}else if(e.key==='Escape'&&$('#dlg').hidden)closeDeck()});
+document.addEventListener('keydown',e=>{if(!$('#dlg').hidden){if(e.key==='Escape'){e.preventDefault();$('#dlg').hidden=true}return}if($('#deck').hidden)return;
+ if(e.key==='Home'){e.preventDefault();go(0)}else if(e.key==='End'){e.preventDefault();go(DK.sl.length-1)}else if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();go(DK.i+1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(DK.i-1)}else if(e.key==='Escape'&&$('#dlg').hidden)closeDeck()});
 addEventListener('resize',()=>{if(!$('#deck').hidden)go(DK.i,1)});
 function deckText(did){const D=DECKS[did],M=hdrMeta(did);const L=[];if(M.cls)L.push(M.cls);L.push(D.n.toUpperCase());[M.op,M.unit,M.when].filter(Boolean).forEach(x=>L.push(x));L.push('');
  for(const s of slides(did)){if(s.ty)continue;L.push(`${s.ix+1}. ${s.g?s.g+' — ':''}${s.t}${s.sub?' — '+s.sub:''}`);
@@ -998,12 +1068,15 @@ async function exportPPTX(did,btn){if(!ST.dl&&!standalone()){toast('File downloa
     else String(b.d).split('\n').filter(x=>x.trim()).forEach(x=>runs.push(isSrc(x)?{text:x.trim(),options:{breakLine:true,italic:true,color:'506D1F',fontSize:11}}:{text:x,options:{breakLine:true}}))}
    const solo=sd.bl.length===1&&!sd.bl[0].from&&sd.bl[0].ty!=='none'&&sd.bl[0].ty!=='img';if(solo&&runs.length>1)runs.shift();
    const pw=ims.length?6.3:12.4;
-   const lns=(rs,fs)=>rs.reduce((a,r)=>a+Math.max(1,Math.ceil((r.text.length+(r.options.bullet?4:0))/(pw*72/(fs*0.52))))+(r.options.bold?0.3:0),0);
-   const avail=fs=>(BOT-TOP)*72/(fs*1.2)*1.02;
+   const lns=(rs,fs)=>rs.reduce((a,r)=>a+Math.max(1,Math.ceil((r.text.length+(r.options.bullet?4:0))/(pw*72/(fs*0.55))))+(2+(r.options.bold?4:0))/(fs*1.2),0);
+   const avail=fs=>(BOT-TOP)*72/(fs*1.2)*0.93;
    let FS=12;for(const f of [18,16,14,12]){if(lns(runs,f)<=avail(f)-(tabs.length?Math.min(8,tabs[0].d.rows.length*1.6+2):0)){FS=f;break}}
-   const pages=[];let cur=[],cl=0;const cap=avail(FS);
-   for(const r of runs){const l=lns([r],FS);if(cur.length&&(cl+l>cap||(r.options.bold&&cl+l+1.5>cap))){pages.push(cur);cur=[];cl=0}cur.push(r);cl+=l}
-   if(cur.length)pages.push(cur);const PG=pages.length?pages:[[]];
+   const cap=avail(FS),cpl=pw*72/(FS*0.52);
+   const runs2=[];for(const r of runs){if(lns([r],FS)<=cap*0.8){runs2.push(r);continue}const max=Math.floor(cap*0.7*cpl);let t=r.text;while(t.length>max){let j=t.lastIndexOf('. ',max);if(j<max*0.4)j=t.lastIndexOf(' ',max);if(j<=0)j=max;runs2.push({text:t.slice(0,j+1).trim(),options:{...r.options}});t=t.slice(j+1).trim()}if(t)runs2.push({text:t,options:{...r.options}})}
+   const pages=[];let cur=[],cl=0;
+   for(const r of runs2){const l=lns([r],FS);if(cur.length&&(cl+l>cap||(r.options.bold&&cl+l+1.5>cap))){pages.push(cur);cur=[];cl=0}cur.push(r);cl+=l}
+   if(cur.length)pages.push(cur);
+   if(tabs.length&&pages.length){const rows=tabs.reduce((a,b)=>a+b.d.rows.length+2,0);if(lns(pages[pages.length-1],FS)>cap-Math.min(cap*0.6,rows*1.6+2))pages.push([])}const PG=pages.length?pages:[[]];
    for(let k=0;k<PG.length;k++){const pg=PG[k];const s=p.addSlide({masterName:'MDMP'});head(s,kick,sd.t+(k?' (cont.)':''),sd.sub);
     const fs=FS;const pic=ims.length&&k===0;const w=pic?6.3:12.4;
     const hasTab=tabs.length&&k===PG.length-1;let y=TOP;
@@ -1027,44 +1100,44 @@ const EXK={
  issuing_hq:['hdr_hhq','line','Headquarters issuing the order.'],
  op_type:['w1_type','line','Type of operation the receiving unit conducts or supports (offense, defense, stability…, with its form if stated).'],
  location:['w1_loc','text','General location of the operation (areas, towns, map sheets).'],
- hq2:['hq2','text',"Mission and commander's intent of the issuing headquarters' own higher headquarters (in the issuing order, para 1.d — 'higher headquarters'); it is two echelons above the receiving unit."],
+ hq2:['hq2','text',"Mission and commander's intent of the issuing headquarters' own higher headquarters (in the issuing order, para 1, friendly forces — higher headquarters); it is two echelons above the receiving unit."],
  hq1_mission:['hq1_mission','text','Mission statement of the issuing headquarters (para 2), verbatim.'],
  hq1_intent:['hq1_intent','text',"Commander's intent of the issuing headquarters (para 3.a), verbatim: expanded purpose, key tasks, end state."],
  hq1_conops:['hq1_conops','text',"Concept of operations of the issuing headquarters (para 3.b): phases, decisive and shaping operations, main effort, and the receiving unit's role. Summarize faithfully if long."],
  adjacent:['adjacent','text','Missions or tasks of adjacent, supporting and supported units that matter to the receiving unit, one per line.'],
  area:['ao','text',"Receiving unit's assigned area (AO, zone or sector), boundaries, area of interest and key control measures, as stated."],
  enemy:['hhq_enemy','text','Enemy situation as stated (para 1.c, annex B): composition, disposition, strength, capabilities, recent activity.'],
- environment:['hhq_env','text','Terrain, weather, light data and civil considerations as stated (para 1.a, 1.b, 1.f, annex B).'],
+ environment:['hhq_env','text','Terrain, weather, light data and civil considerations as stated (para 1 — area of interest, area of operations, civil considerations; annex B).'],
  specified_tasks:['t_spec','list','Every task assigned to the receiving unit (or to all subordinate units) anywhere in the document — tasks to subordinate units, coordinating instructions, annexes — one task per item, as written.'],
  onorder_tasks:['t_onorder','list','On-order and be-prepared missions assigned to the receiving unit.'],
  constraints:['constraints','list','Restrictions imposed on the receiving unit: what it must or must not do, time or space limits, control measures to respect, ROE and fire support coordination restrictions.'],
- forces:['forces','text','Task organization of the receiving unit (para 1.d/1.f, annex A): units attached or detached, effective times, command or support relationships (OPCON, TACON, DS, GS…).'],
+ forces:['forces','text','Task organization of the receiving unit (para 1, attachments and detachments; annex A): units attached or detached, effective times, command or support relationships (OPCON, TACON, DS, GS…).'],
  facts:['facts','list',"Other explicit facts relevant to the receiving unit's planning (assets made available and when, distances, statuses) — only if stated."],
  assumptions:['assumptions','table','Assumptions stated by the issuing headquarters (para 1.g).'],
  hhq_ccir:['hhq_ccir','list','CCIRs (PIR, FFIR) and EEFIs of the issuing headquarters, each prefixed with its type.'],
  threat_coas:['threat_coas','table','Enemy courses of action described (e.g., most likely, most dangerous) — annex B or para 1.c.'],
  timeline:['timeline','table','Every date-time group, time or timing stated: effective time, D-day/H-hour, NLT times, phase transitions, rehearsals, back-briefs, light data.'],
  coord:['op_coord','text','Coordinating instructions that apply to the receiving unit and are not already tasks, constraints, CCIRs or timeline items (ROE, risk reduction measures, personnel recovery, environmental considerations…).'],
- ia_ngo:['op_ia','text','Interagency, intergovernmental and nongovernmental organizations in the area (para 1.e).'],
- civil:['op_civil','text','Civil considerations (para 1.f).'],
- logistics:['op_log','text','Sustainment — logistics relevant to the receiving unit (para 4.a, annex F): support areas, supply points, classes of supply, maintenance, transportation.'],
- personnel:['op_pers','text','Sustainment — personnel services (para 4.b).'],
- health:['op_hss','text','Sustainment — health service support (para 4.c, annex F): treatment, evacuation, CASEVAC.'],
- finance:['op_fin','text','Sustainment — financial management (para 4.d).'],
- command:['op_cmd','text','Command (para 5.a): command post locations, succession of command, liaison requirements.'],
- signal:['op_sig','text','Signal (para 5.b, annex H): PACE, nets, reporting, emission control.']};
+ ia_ngo:['op_ia','text','Interagency, intergovernmental and nongovernmental organizations in the area (para 1, situation).'],
+ civil:['op_civil','text','Civil considerations (para 1, situation).'],
+ logistics:['op_log','text','Sustainment — logistics relevant to the receiving unit (para 4, logistics; annex F): support areas, supply points, classes of supply, maintenance, transportation.'],
+ personnel:['op_pers','text','Sustainment — personnel services (para 4, personnel).'],
+ health:['op_hss','text','Sustainment — health service support (para 4, health service support; annex F): treatment, evacuation, CASEVAC.'],
+ finance:['op_fin','text','Sustainment — financial management (para 4).'],
+ command:['op_cmd','text','Command (para 5, command): command post locations, succession of command, liaison requirements.'],
+ signal:['op_sig','text','Signal (para 5, signal; annex H): PACE, nets, reporting, emission control.']};
 const IX={files:[],busy:false,ctl:null,msg:''};
 const str=x=>typeof x==='string'?x.trim():(typeof x==='number'?String(x):'');
 const norm=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
-function ixGuess(name,txt){let m=/annex[\s_-]*([A-V])(?![a-z])/i.exec(name)||/^\s*annex\s+([A-V])\b/im.exec(String(txt||'').slice(0,400));
- if(m)return ROLES.find(r=>r.startsWith('Annex '+m[1].toUpperCase()+' '));const s=name+' '+String(txt||'').slice(0,300);
+function ixGuess(name,txt){const first=String(txt||'').split('\n').find(x=>x.trim())||'';let m=/annex[\s_-]*([A-V])(?![a-z])/i.exec(name)||/^\s*annex\s+([A-V])\b/im.exec(String(txt||'').slice(0,400));
+ if(m)return ROLES.find(r=>r.startsWith('Annex '+m[1].toUpperCase()+' '));const s=name+' '+first;if(/\b(operation order|opord)\b/i.test(name+' '+first)&&!/frag|warn/i.test(name))return ROLES[0];
  if(/frag(ord|mentary)/i.test(s))return 'FRAGORD';if(/warn(ord|ing order)/i.test(s))return 'WARNORD';if(/\b(appendix|tab|exhibit)\b/i.test(name))return 'Appendix / tab / exhibit';return ROLES[0]}
 let PDFP;const PDFV='https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/';
 function pdfjs(){return PDFP||(PDFP=(async()=>{const lib=await import(PDFV+'pdf.min.mjs');if(!globalThis.pdfjsWorker)globalThis.pdfjsWorker=await import(PDFV+'pdf.worker.min.mjs');try{lib.GlobalWorkerOptions.workerSrc=PDFV+'pdf.worker.min.mjs'}catch(e){}return lib})().catch(e=>{PDFP=null;throw new Error('PDF reader could not load')}))}
 async function readPDF(f,rec){const lib=await pdfjs();const doc=await lib.getDocument({data:new Uint8Array(await f.arrayBuffer()),disableFontFace:true,isEvalSupported:false}).promise;rec.pages=doc.numPages;const parts=[];
  for(let i=1;i<=doc.numPages;i++){const pg=await doc.getPage(i);const tc=await pg.getTextContent();
   const t=tc.items.map(x=>(x.str||'')+(x.hasEOL?'\n':'')).join('').replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim();
-  if(t.replace(/\s/g,'').length<25){try{const vp=pg.getViewport({scale:1.6});const c=document.createElement('canvas');c.width=Math.ceil(vp.width);c.height=Math.ceil(vp.height);const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);
+  if(t.replace(/\s/g,'').length<25&&rec.imgs.length<40){try{const vp=pg.getViewport({scale:1.6});const c=document.createElement('canvas');c.width=Math.ceil(vp.width);c.height=Math.ceil(vp.height);const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);
     await pg.render({canvasContext:x,canvas:c,viewport:vp}).promise;const b=await new Promise(r=>c.toBlob(r,'image/jpeg',0.85));if(b)rec.imgs.push(b)}catch(e){}}
   else parts.push('[page '+i+']\n'+t);
   ixStat(rec,'Reading… page '+i+' / '+doc.numPages)}
@@ -1076,8 +1149,8 @@ async function inflate(data){if(typeof DecompressionStream==='function'){try{ret
 function zipIndex(buf){const dv=new DataView(buf);let e=buf.byteLength-22;const stop=Math.max(0,e-70000);while(e>=stop&&dv.getUint32(e,true)!==0x06054b50)e--;if(e<stop)throw new Error('Damaged archive');
  const n=dv.getUint16(e+10,true);let p=dv.getUint32(e+16,true);const td=new TextDecoder();const out={};
  for(let i=0;i<n&&p+46<=buf.byteLength;i++){const m=dv.getUint16(p+10,true),cs=dv.getUint32(p+20,true),fl=dv.getUint16(p+28,true),xl=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),lo=dv.getUint32(p+42,true);
-  out[td.decode(new Uint8Array(buf,p+46,fl))]={m,cs,lo};p+=46+fl+xl+cl}return out}
-async function zipText(buf,idx,name){const z=idx[name];if(!z)return null;const dv=new DataView(buf);const st=z.lo+30+dv.getUint16(z.lo+26,true)+dv.getUint16(z.lo+28,true);const data=new Uint8Array(buf,st,z.cs);
+  out[td.decode(new Uint8Array(buf,p+46,fl))]={m,cs,lo,us:dv.getUint32(p+24,true)};p+=46+fl+xl+cl}return out}
+async function zipText(buf,idx,name){const z=idx[name];if(!z)return null;if(z.us>50e6)throw new Error('Archive entry too large');const dv=new DataView(buf);const st=z.lo+30+dv.getUint16(z.lo+26,true)+dv.getUint16(z.lo+28,true);const data=new Uint8Array(buf,st,z.cs);
  if(z.m===0)return new TextDecoder().decode(data);if(z.m!==8)return null;return new TextDecoder().decode(await inflate(data))}
 const xmlDoc=t=>new DOMParser().parseFromString(t,'application/xml');
 const kids=(n,l)=>[...n.childNodes].filter(c=>c.nodeType===1&&(!l||c.localName===l));
@@ -1093,13 +1166,16 @@ async function readSlides(buf,idx){const re=/slide(\d+)\.xml$/;const out=[];cons
  for(const nm of Object.keys(idx).filter(k=>/^ppt\/slides\/slide\d+\.xml$/.test(k)).sort(byNum(re))){const t=para(xmlDoc(await zipText(buf,idx,nm)));if(t.trim())out.push('[slide '+re.exec(nm)[1]+']\n'+t)}
  for(const nm of Object.keys(idx).filter(k=>/^ppt\/notesSlides\/notesSlide\d+\.xml$/.test(k)).sort(byNum(/notesSlide(\d+)/))){const t=para(xmlDoc(await zipText(buf,idx,nm)));if(t.trim())out.push('[notes '+/notesSlide(\d+)/.exec(nm)[1]+']\n'+t)}return out.join('\n\n')}
 async function readSheets(buf,idx){const ss=[];const sx=await zipText(buf,idx,'xl/sharedStrings.xml');if(sx)for(const si of xmlDoc(sx).getElementsByTagNameNS('*','si'))ss.push([...si.getElementsByTagNameNS('*','t')].map(t=>t.textContent).join(''));
+ const dateSt=new Set();const st=await zipText(buf,idx,'xl/styles.xml');if(st){const d=xmlDoc(st);const cf={};for(const f of d.getElementsByTagNameNS('*','numFmt'))cf[f.getAttribute('numFmtId')]=f.getAttribute('formatCode')||'';const xfs=d.getElementsByTagNameNS('*','cellXfs')[0];if(xfs)kids(xfs,'xf').forEach((x,i)=>{const id=+x.getAttribute('numFmtId');const code=(cf[id]||'').replace(/"[^"]*"|\[[^\]]*\]/g,'');if((id>=14&&id<=22)||(id>=45&&id<=47)||/[dmyh]/i.test(code))dateSt.add(String(i))})}
+ const xd=n=>{const d=new Date(Math.round((n-25569)*864e5));return isNaN(d)?String(n):d.toISOString().slice(0,16).replace('T',' ').replace(' 00:00','')};
  let names=[];const wb=await zipText(buf,idx,'xl/workbook.xml');if(wb)names=[...xmlDoc(wb).getElementsByTagNameNS('*','sheet')].map(x=>x.getAttribute('name'));
  const re=/sheet(\d+)\.xml$/;const out=[];
  for(const nm of Object.keys(idx).filter(k=>/^xl\/worksheets\/sheet\d+\.xml$/.test(k)).sort(byNum(re))){const d=xmlDoc(await zipText(buf,idx,nm));const rows=[];
-  for(const r of d.getElementsByTagNameNS('*','row')){const cells=kids(r,'c').map(c=>{const t=c.getAttribute('t');if(t==='inlineStr')return [...c.getElementsByTagNameNS('*','t')].map(x=>x.textContent).join('');const v=kids(c,'v')[0];if(!v)return '';return t==='s'?(ss[+v.textContent]||''):v.textContent}).map(x=>x.trim());if(cells.some(Boolean))rows.push(cells.filter(Boolean).join(' | '))}
+  for(const r of d.getElementsByTagNameNS('*','row')){const cells=kids(r,'c').map(c=>{const t=c.getAttribute('t');if(t==='inlineStr')return [...c.getElementsByTagNameNS('*','t')].map(x=>x.textContent).join('');const v=kids(c,'v')[0];if(!v)return '';if(t==='s')return ss[+v.textContent]||'';const n=+v.textContent;return !t&&dateSt.has(c.getAttribute('s'))&&n>0&&n<2958466?xd(n):v.textContent}).map(x=>x.trim());if(cells.some(Boolean))rows.push(cells.filter(Boolean).join(' | '))}
   if(rows.length)out.push('[sheet '+(names[+re.exec(nm)[1]-1]||re.exec(nm)[1])+']\n'+rows.join('\n'))}return out.join('\n\n')}
+const odfT=n=>{let s='';for(const c of n.childNodes){if(c.nodeType===3)s+=c.textContent;else if(c.nodeType===1){const l=c.localName;if(l==='tab')s+='\t';else if(l==='s')s+=' '.repeat(+(c.getAttribute('text:c')||c.getAttributeNS('*','c')||1)||1);else if(l==='line-break')s+='\n';else s+=odfT(c)}}return s};
 async function readODF(buf,idx){const d=xmlDoc(await zipText(buf,idx,'content.xml'));const out=[];
- const walk=n=>{for(const c of kids(n)){const l=c.localName;if(l==='p'||l==='h'){const t=c.textContent;if(t.trim())out.push(t)}else if(l==='table-row'){const cells=kids(c,'table-cell').map(x=>x.textContent.trim());if(cells.some(Boolean))out.push(cells.filter(Boolean).join(' | '))}else walk(c)}};walk(d.documentElement);return out.join('\n')}
+ const walk=n=>{for(const c of kids(n)){const l=c.localName;if(l==='p'||l==='h'){const t=odfT(c);if(t.trim())out.push(t)}else if(l==='table-row'){const cells=kids(c,'table-cell').map(x=>x.textContent.trim());if(cells.some(Boolean))out.push(cells.filter(Boolean).join(' | '))}else walk(c)}};walk(d.documentElement);return out.join('\n')}
 async function readZip(buf){const idx=zipIndex(buf);
  if(idx['word/document.xml'])return readWord(buf,idx);if(Object.keys(idx).some(k=>k.startsWith('ppt/slides/')))return readSlides(buf,idx);
  if(Object.keys(idx).some(k=>k.startsWith('xl/worksheets/')))return readSheets(buf,idx);if(idx['content.xml'])return readODF(buf,idx);
@@ -1110,10 +1186,10 @@ function readRTF(t){let out='',i=0,depth=0,skip=0;const SK=/^(fonttbl|colortbl|s
   if(c==='}'){if(skip===depth)skip=0;depth--;i++;continue}
   if(skip){i++;continue}
   if(c==='\\'){const r=/^\\([a-z]+)(-?\d+)? ?|^\\'([0-9a-f]{2})|^\\([\s\S])/i.exec(t.slice(i,i+40));if(!r){i++;continue}
-   if(r[3])out+=String.fromCharCode(parseInt(r[3],16));
-   else if(r[1]){const w=r[1].toLowerCase();if(['par','line','row','sect','page'].includes(w))out+='\n';else if(w==='cell'||w==='tab')out+=' | ';
+   if(r[3])out+=new TextDecoder('windows-1252').decode(new Uint8Array([parseInt(r[3],16)]));
+   else if(r[1]){const w=r[1].toLowerCase();const NM={rquote:'\u2019',lquote:'\u2018',rdblquote:'\u201D',ldblquote:'\u201C',endash:'\u2013',emdash:'\u2014',bullet:'\u2022',emspace:' ',enspace:' '};if(NM[w])out+=NM[w];else if(['par','line','row','sect','page'].includes(w))out+='\n';else if(w==='cell'||w==='tab')out+=' | ';
     else if(w==='u'&&r[2]){out+=String.fromCharCode((+r[2]+65536)%65536);i+=r[0].length;if(t[i]==='\\'&&t[i+1]==="'")i+=4;else if(t[i]!=='\\'&&t[i]!=='{'&&t[i]!=='}')i++;continue}}
-   else if(r[4]){if('\\{}'.includes(r[4]))out+=r[4];else if(r[4]==='~')out+=' '}
+   else if(r[4]){if('\\{}'.includes(r[4]))out+=r[4];else if(r[4]==='~')out+=' ';else if(r[4]==='\n'||r[4]==='\r')out+='\n'}
    i+=r[0].length;continue}
   if(c!=='\r'&&c!=='\n')out+=c;i++}
  return out.replace(/[ \t]+/g,' ').replace(/ ?\| ?(?=\n|$)/g,'').replace(/\n\s*\n+/g,'\n').trim()}
@@ -1129,7 +1205,7 @@ async function readAny(f,rec){const buf=await f.arrayBuffer();const u8=new Uint8
  if(h.startsWith('%PDF')||low.endsWith('.pdf'))return readPDF(new Blob([buf]),rec);
  if(u8[0]===0x50&&u8[1]===0x4B&&u8[2]===3&&u8[3]===4){rec.kind='archive';rec.text=await readZip(buf);return}
  const img=/^image\//.test(f.type||'')||(u8[0]===0xFF&&u8[1]===0xD8)||h.startsWith('\x89PNG')||h.startsWith('GIF8')||(h.startsWith('RIFF')&&h.slice(8,12)==='WEBP')||/ftyp(heic|heix|mif1|avif)/.test(String.fromCharCode(...u8.slice(4,12)));
- if(img){const okT=['image/jpeg','image/png','image/webp','image/gif'];rec.imgs=[okT.includes(f.type)?f:await toJPEG(f).catch(()=>{throw new Error('Image format not readable in this browser — convert it to JPEG or PNG')})];rec.pages=1;return}
+ if(img){const okT=['image/jpeg','image/png','image/webp','image/gif'];rec.imgs=[okT.includes(f.type)&&f.size<=3.5e6?f:await toJPEG(f).catch(()=>{throw new Error('Image format not readable in this browser — convert it to JPEG or PNG')})];rec.pages=1;return}
  if(h.startsWith('{\\rtf')){rec.text=readRTF(new TextDecoder('latin1').decode(u8));return}
  if(looksText(u8)){let t=new TextDecoder().decode(u8);if(t.includes(String.fromCharCode(0xFFFD)))t=new TextDecoder('windows-1252').decode(u8);rec.text=/^\s*<(!doctype html|html|\?xml|[a-z]+:)/i.test(t)||/\.(html?|xml|xhtml|mht)$/.test(low)?(/<html/i.test(t)?readHTML(t):t.replace(/<[^>]+>/g,' ').replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n').trim()):t;return}
  rec.text=rawStrings(u8);rec.note='text recovered from a binary file — check the proposals';if(rec.text.replace(/[^A-Za-zÀ-ÿ]/g,'').length<40)throw new Error('No readable text — save it as PDF or Word .docx')}
@@ -1143,7 +1219,7 @@ async function ixAdd(f){const rec={id:uid(),name:f.name||'Pasted text',role:ROLE
  ixDraw()}
 function ixStat(rec,t){rec.status=t;const el=$(`[data-ixs="${rec.id}"]`);if(el)el.textContent=t}
 function chunks(t,max){const out=[];let cur='';for(const part of t.split(/\n\n(?=\[page )/)){if(cur&&(cur.length+part.length)>max){out.push(cur);cur=''}
-  if(part.length>max){for(let i=0;i<part.length;i+=max)out.push(part.slice(i,i+max))}else cur+=(cur?'\n\n':'')+part}if(cur)out.push(cur);return out}
+  if(part.length>max){let i=0;while(i<part.length){let j=part.length<=i+max?part.length:part.lastIndexOf('\n',i+max);if(j<=i)j=Math.min(part.length,i+max);out.push(part.slice(i,j));i=j}}else cur+=(cur?'\n\n':'')+part}if(cur)out.push(cur);return out}
 function ixPrompt(unit,j){const keys=Object.entries(EXK).map(([k,[,kind,d]])=>`- "${k}" (${kind==='line'||kind==='text'?'text':kind}): ${d}`).join('\n');
  return `You extract information from a military order issued by a higher headquarters, to prepare the mission analysis of a subordinate unit using the U.S. Army MDMP (FM 5-0).
 Receiving unit: "${unit}".
@@ -1170,8 +1246,8 @@ DOCUMENT TEXT:
 ${j.t}
 >>>`}`}
 const SMERR={not_granted:'Claude access was not allowed for this page.',sampling_disabled:'Claude is not available for this account.',not_declared:'Claude access is not enabled on this page.',rate_limited:'Claude usage limit reached — try again later.',session_expired:'Sign in to Claude again.',cancelled:'Stopped.',refused:'Claude declined this document.',invalid_json:'Unreadable answer — try again.',prompt_too_large:'Document part too large.',images_unavailable:'Scanned pages cannot be sent in this view.',image_rejected:'A page image was rejected.',empty_completion:'No answer — try again.',upstream_error:'Connection problem — try again.'};
-async function ixRun(){const unit=String(V.hdr_unit||'').trim();
- if(!unit){toast('Enter your unit, as designated in the order');const u=$('#f-hdr_unit');if(u)u.focus();return}
+async function ixRun(){if(IX.busy)return;const unit=String(V.hdr_unit||'').trim();
+ if(!unit){toast('Enter your unit, as designated in the order');const u=$('#f-hdr_unit_ix')||$('#f-hdr_unit');if(u)u.focus();return}
  if(!ST.sm){toast('Claude is not available in this view');return}
  const docs=IX.files.filter(f=>!f.status.startsWith('Not readable')&&!f.status.startsWith('Reading'));if(!docs.length){toast('Add the order first');return}
  let lim=null;try{lim=await ST.sm.limits()}catch(e){}
@@ -1192,12 +1268,13 @@ async function ixRun(){const unit=String(V.hdr_unit||'').trim();
  await Promise.all([worker(),worker()]);
  IX.busy=false;IX.ctl=null;
  const props=ixMerge(docs);
- if(fatal&&fatal!=='cancelled'&&!props.length){IX.msg=SMERR[fatal]||fatal;ixDraw();return}
+ if(fatal&&!props.length){IX.msg=SMERR[fatal]||fatal;ixDraw();return}
+ const allFailed=docs.every(f=>f.err&&!(f.res||[]).length);
  setV('intake',{t:Date.now(),unit,docs:docs.map(f=>({name:f.name,role:f.role,pages:f.pages,chars:f.text.length,status:f.status})),props,applied:0});
- IX.msg=props.length?`${props.length} fields proposed — check them below, then apply.`:(fatal?SMERR[fatal]:'Nothing found for your unit — check the unit designation.');ixDraw();
+ IX.msg=props.length?`${props.length} fields proposed — check them below, then apply.`+(fatal==='cancelled'?' (stopped before the end)':''):(fatal?SMERR[fatal]:allFailed?'Claude’s answers could not be read — try again.':'Nothing found for your unit — check the unit designation.');ixDraw();
  const rv=$('#ixrv');if(rv)rv.scrollIntoView({block:'start'})}
-function ixMerge(files){const acc={};
- for(const f of files){const lab=roleShort(f.role);for(const r of f.res||[])for(const [k,v] of Object.entries(r))if(EXK[k])(acc[k]=acc[k]||[]).push({v,lab})}
+function ixMerge(files){const acc=Object.create(null);
+ for(const f of files){const lab=roleShort(f.role);for(const r of f.res||[])for(const [k,v] of Object.entries(r))if(Object.prototype.hasOwnProperty.call(EXK,k))(acc[k]=acc[k]||[]).push({v,lab})}
  const props=[];
  for(const k of Object.keys(EXK)){const arr=acc[k];if(!arr)continue;const [id,kind]=EXK[k];let val=null;const ref=(a,o)=>{const r=str(o&&o.ref);return !r?a.lab:r.toLowerCase().startsWith(a.lab.toLowerCase())?r:a.lab+', '+r};
   if(kind==='line'){val=arr.map(a=>str(a.v&&typeof a.v==='object'?a.v.text:a.v)).find(Boolean)||null}
@@ -1213,7 +1290,7 @@ function ixMerge(files){const acc={};
  return props}
 function ixApply(){const I=V.intake;if(!I||!I.props)return;let n=0;
  for(const p of I.props){if(p.act==='skip')continue;const d=def(p.id),cur=V[p.id];let nv;
-  if(d.t==='table'){const kf=r=>norm(Object.entries(r).filter(([k])=>k!=='_id'&&k!=='rem').map(([,v])=>String(v).replace(/\s*\([^)]*\)\s*$/,'')).join(' '));const have=new Set(p.act==='append'&&Array.isArray(cur)?cur.map(kf):[]);
+  if(d.t==='table'){const KC={assumptions:['a'],threat_coas:['name'],timeline:['ev','dtg']}[p.id];const kf=r=>norm(Object.entries(r).filter(([k])=>KC?KC.includes(k):k!=='_id'&&k!=='rem').map(([,v])=>String(v).replace(/\s*\([^)]*\)\s*$/,'')).join(' '));const have=new Set(p.act==='append'&&Array.isArray(cur)?cur.map(kf):[]);
    const rows=p.val.filter(r=>!have.has(kf(r))).map(r=>({...r,_id:uid()}));nv=p.act==='append'&&Array.isArray(cur)?[...cur,...rows]:rows}
   else if(p.act==='append'&&filled(cur,d.t)){if(d.t==='list'){const have=new Set(lines(cur).map(norm));const add=lines(p.val).filter(x=>!have.has(norm(x)));nv=add.length?String(cur).trimEnd()+'\n'+add.join('\n'):cur}else nv=String(cur).trimEnd()+'\n\n'+p.val}
   else nv=p.val;
@@ -1224,23 +1301,23 @@ function intakeCard(){const I=V.intake;const can=!!ST.sm;
  const rows=IX.files.map(f=>`<tr><td>${esc(f.name)}</td><td><select class="cell in" data-ixrole="${f.id}" aria-label="Document type of ${esc(f.name)}" ${IX.busy?'disabled':''}>${ROLES.map(r=>`<option ${f.role===r?'selected':''}>${esc(r)}</option>`).join('')}</select></td><td class="num">${[f.pages?f.pages+' p.':'',f.text?Math.max(1,Math.round(f.text.length/1000))+'k chars':'',f.imgs.length?f.imgs.length+' image'+(f.imgs.length>1?'s':''):''].filter(Boolean).join(' · ')}</td><td><span data-ixs="${f.id}">${esc(f.status)}</span>${f.note?`<br><span class="hl">${esc(f.note)}</span>`:''}</td><td><button class="btn s x" data-act="ixdel" data-id="${f.id}" aria-label="Remove ${esc(f.name)}" ${IX.busy?'disabled':''}>✕</button></td></tr>`).join('');
  const fills=[...new Set(Object.values(EXK).map(x=>x[0]))].map(id=>`<li>${stepOf(id)?'Step '+stepOf(id)+' · ':''}${esc(def(id).l)}</li>`).join('');
  let rv='';
- if(I&&Array.isArray(I.props)&&I.props.length){const ap=I.applied?`<p class="hl">Applied ${esc(fmtDT(I.applied))} — ${I.appliedN} field${I.appliedN===1?'':'s'} filled. Values remain editable in each step.</p>`:'';
-  rv=`<div class="rv" id="ixrv"><h4>Proposed elements — ${I.props.length} field${I.props.length>1?'s':''} from ${I.docs.length} document${I.docs.length>1?'s':''}</h4>
+ if(I&&Array.isArray(I.props)&&I.props.length){const ap=I.applied?`<p class="hl">Applied ${esc(fmtDT(I.applied))} — ${+I.appliedN||0} field${+I.appliedN===1?'':'s'} filled. Values remain editable in each step.</p>`:'';
+  rv=`<div class="rv" id="ixrv"><h3>Proposed elements — ${I.props.length} field${I.props.length>1?'s':''} from ${I.docs.length} document${I.docs.length>1?'s':''}</h3>
   <p class="hl">Read for ${esc(I.unit)} from: ${esc(I.docs.map(d=>roleShort(d.role)+' ('+d.name+')').join(', '))}. Each value cites its paragraph. Check before applying: Claude extracts, it can misread.</p>${ap}
   <div class="tw"><table class="stack"><thead><tr><th>Action</th><th>Field</th><th>Proposed value</th><th>Now</th></tr></thead><tbody>${I.props.map((p,i)=>{const d=def(p.id);const pv=ixPreview(p);const isL=d.t==='list'||d.t==='table';const opts=has(p.id)?(isL?['append','fill','skip']:['skip','append','fill']):['fill','skip'];const nm={fill:has(p.id)?'Replace':'Fill',append:'Append',skip:'Skip'};
    return `<tr><td><select class="in" data-ixa="${i}" aria-label="Action for ${esc(d.l)}">${opts.map(o=>`<option value="${o}" ${p.act===o?'selected':''}>${nm[o]}</option>`).join('')}</select></td><td><b>${esc(d.l)}</b>${stepOf(p.id)?`<br><a href="#step-${stepOf(p.id)}">Step ${stepOf(p.id)}</a>`:'<br>Exercise header'}</td><td><details><summary>${esc(pv.slice(0,150))}${pv.length>150?'…':''}</summary><div class="full">${esc(pv)}</div></details></td><td>${has(p.id)?'Has content':'Empty'}</td></tr>`}).join('')}</tbody></table></div>
   <div class="row" style="margin-top:10px"><button class="btn a" data-act="ixapply">${I.applied?'Apply again':'Apply to the tool'}</button><button class="btn" data-act="ixdiscard">Discard proposals</button></div></div>`}
- return `<div class="card ic" id="intake"><h3>Higher order — OPORD and annexes</h3>
+ return `<div class="card ic" id="intake"><h2>Higher order — OPORD and annexes</h2>
  <p class="hl" style="margin-top:6px">Drop the order issued by your higher headquarters and its annexes. Claude reads them and proposes the higher mission, intent and concept, your specified and on-order tasks, constraints, task organization, timeline, enemy situation, CCIRs, coordinating instructions, sustainment and signal. Only what the documents state is taken, with its paragraph reference.</p>
- ${W('hdr_unit',{l:'Your unit, as designated in the order'})}
- <div class="drop" id="drop"><label class="btn" for="ixf">Choose files</label><input type="file" id="ixf" multiple hidden><span class="hl" style="margin:0">or drop them here — any format: PDF, Word, Excel, PowerPoint, OpenDocument, RTF, HTML, text, e-mail, page photos</span></div>
+ ${W('hdr_unit',{l:'Your unit, as designated in the order',id:'f-hdr_unit_ix'})}
+ <div class="drop" id="drop"><button type="button" class="btn" data-act="pick" data-id="ixf">Choose files</button><input type="file" id="ixf" multiple hidden><span class="hl" style="margin:0">or drop them here — any format: PDF, Word, Excel, PowerPoint, OpenDocument, RTF, HTML, text, e-mail, page photos</span></div>
  <details class="ls"><summary>Paste text instead</summary><textarea class="in" id="ixt" rows="5" aria-label="Order text"></textarea><div class="row" style="margin-top:6px"><button class="btn s" data-act="ixpaste">Add as a document</button></div></details>
  ${rows?`<div class="tw"><table class="ed stack" style="margin-top:10px"><thead><tr><th>File</th><th>Document</th><th>Content</th><th>Status</th><th><span hidden>Remove</span></th></tr></thead><tbody>${rows}</tbody></table></div>`:''}
  <div class="row" style="margin-top:10px"><button class="btn p" data-act="ixgo" ${IX.busy||!can||!IX.files.length?'disabled':''}>${IX.busy?'Extracting…':'Extract and propose'}</button>${IX.busy?'<button class="btn" data-act="ixstop">Stop</button>':''}</div>
  <p class="ixp" role="status">${esc(can?IX.msg:'Claude is not available in this view: files can be read here, extraction needs the page opened in Claude.')}</p>
  <details class="ls"><summary>Fields the intake can fill</summary><ul class="fills">${fills}</ul></details>
  ${rv}</div>`}
-function ixDraw(){const el=$('#intake');if(el)el.outerHTML=intakeCard()}
+function ixDraw(){const el=$('#intake');if(!el)return;const ta=$('#ixt'),txt=ta?ta.value:'',op=ta?ta.closest('details').open:false,fo=document.activeElement&&document.activeElement.id;el.outerHTML=intakeCard();const nt=$('#ixt');if(nt){nt.value=txt;nt.closest('details').open=op}if(fo){const f=document.getElementById(fo);if(f)f.focus()}}
 document.addEventListener('dragover',e=>{const d=e.target.closest&&e.target.closest('#drop');if(d){e.preventDefault();d.classList.add('on')}});
 document.addEventListener('dragleave',e=>{const d=e.target.closest&&e.target.closest('#drop');if(d)d.classList.remove('on')});
 document.addEventListener('drop',e=>{const d=e.target.closest&&e.target.closest('#drop');if(!d)return;e.preventDefault();d.classList.remove('on');if(IX.busy)return;[...(e.dataTransfer?.files||[])].forEach(ixAdd)});
@@ -1250,6 +1327,8 @@ $('#dl-task').innerHTML=TASKS.map(t=>`<option value="${esc(t.toLowerCase())}">`)
 $('#dl-purp').innerHTML=PURP.map(t=>`<option value="in order to ${esc(t.toLowerCase())}">`).join('');
 addEventListener('hashchange',()=>{render();scrollTo(0,0)});
 $('#dlg').addEventListener('click',e=>{if(e.target.id==='dlg')$('#dlg').hidden=true});
+addEventListener('online',()=>{for(const k of [...ST.failed])if(!ST.busy[k]){clearTimeout(ST.timers[k]);delete ST.timers[k];queue(k,100)}});addEventListener('pagehide',()=>saveLocalNow());document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveLocalNow()});
+try{new ResizeObserver(([e])=>document.documentElement.style.setProperty('--hdr',e.target.offsetHeight+'px')).observe($('.top'))}catch(e){}
 loadLocal();render();status('Saved in this browser');
 (async()=>{const C=window.claude;if(!C||typeof C.use!=='function'){ST.db=null;status('Saved in this browser only',1);return}
  try{const [db,us,dl,sm]=await Promise.all([C.use('db'),C.use('user'),C.use('downloads'),C.use('sample')]);ST.dl=dl||null;ST.db=db||null;ST.sm=sm||null;
